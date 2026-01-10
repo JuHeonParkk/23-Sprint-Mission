@@ -5,12 +5,12 @@
 }
 
 body {
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
+  /* font-family: "Pretendard Variable", Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
   background-color: #ffffff;
-  color: #374151;
+  color: var(--secondary-700);
 }
 
 a {
@@ -44,7 +44,7 @@ header {
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: #3692ff;
+  background-color: var(--primary-100);
   border-radius: 8px;
 }
 
@@ -58,14 +58,14 @@ header {
 
 .btn:hover {
   cursor: pointer;
-  background-color: #1967d6;
+  background-color: var(--primary-200);
 }
 
 /*ad*/
 #ad {
   width: 100%;
   height: 540px;
-  background-color: #cfe5ff;
+  background-color: var(--bg-blue);
   display: flex;
   justify-content: center;
 }
@@ -108,11 +108,11 @@ header {
   width: 100%;
   max-width: 357px;
   height: 56px;
-  background-color: #3692ff;
+  background-color: var(--primary-100);
   border-radius: 40px;
   font-size: clamp(0.95rem, 2.5vw, 1.25rem);
   font-weight: 600;
-  color: #f9fafb;
+  color: var(--secondary-50);
 }
 
 .ad_img {
@@ -140,7 +140,7 @@ section {
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  background-color: #fcfcfc;
+  background-color: var(--bg-gray);
 }
 
 .section_img {
@@ -176,7 +176,7 @@ section {
 .section_theme {
   font-size: clamp(0.75rem, 2vw, 1rem);
   font-weight: 400;
-  color: #3692ff;
+  color: var(--primary-100);
   margin-bottom: -12px;
 }
 
@@ -190,7 +190,7 @@ section {
 footer {
   width: 100%;
   height: 160px;
-  background-color: #111827;
+  background-color: var(--secondary-900);
 }
 
 .footer_inner {
@@ -210,7 +210,7 @@ footer {
   gap: 30px;
   margin: 0 16px;
   font-weight: 400;
-  color: #9ca3af;
+  color: var(--secondary-400);
 }
 
 .footer_sns {
