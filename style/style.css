@@ -19,7 +19,7 @@ a {
 }
 
 /*header*/
-header {
+.header {
   width: 100%;
   height: 70px;
 }
@@ -62,7 +62,7 @@ header {
 }
 
 /*ad*/
-#ad {
+.ad {
   width: 100%;
   height: 540px;
   background-color: var(--bg-blue);
@@ -187,7 +187,7 @@ section {
 }
 
 /*footer*/
-footer {
+.footer {
   width: 100%;
   height: 160px;
   background-color: var(--secondary-900);
