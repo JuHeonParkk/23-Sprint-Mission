@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,42 +11,35 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
     <link rel="icon" href="img/favicon.ico" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style/global.css" />
+    <link rel="stylesheet" href="style/style.css" />
   </head>
   <body>
     <!--header-->
     <header>
       <div class="header_inner">
-        <h1 class="logo">
-          <a href="/">
-            <img src="img/logo.png" alt="logo" />
-          </a>
-        </h1>
-        <a href="/login " class="login btn">로그인</a>
+        <a href="./" class="logo">
+          <img src="img/logo.svg" alt="logo" />
+        </a>
+        <a href="./login.html " class="go_login btn">로그인</a>
       </div>
     </header>
-    <!--ad-->
-    <div id="ad">
-      <div class="ad_inner">
-        <div class="ad_content">
-          <div class="ad_text">
-            <h2 class="title">일상의 모든 물건을<br />거래해 보세요</h2>
-            <a href="/items" class="ad_btn btn">구경하러 가기</a>
-          </div>
-          <div class="ad_img">
-            <img src="img/main/ad_img.png" alt="ad_img" />
-          </div>
+    <!--hero_section-->
+    <div class="hero_section">
+      <div class="hero_section_inner">
+        <div class="hero_text">
+          <h2 class="title">일상의 모든 물건을<br />거래해 보세요</h2>
+          <a href="./items" class="hero_btn btn">구경하러 가기</a>
         </div>
+        <img src="img/main/hero_img.png" alt="hero_image" />
       </div>
     </div>
     <!--section01-->
     <section>
       <div class="section_inner">
-        <div class="section_img">
-          <img src="img/main/section_01.png" alt="section_01" />
-        </div>
-        <div class="section_text right">
-          <p class="section_theme">Hot Item</p>
+        <img src="img/main/section_01.png" alt="section_01" />
+        <div class="section_text">
+          <span class="section_theme">Hot Item</span>
           <h2 class="title">인기 상품을<br />확인해 보세요</h2>
           <p class="section_info">
             가장 HOT한 중고거래 물품을 판다 마켓에서 확인해 보세요
@@ -56,27 +49,23 @@
     </section>
     <!--section02-->
     <section>
-      <div class="section_inner">
-        <div class="section_text left">
-          <p class="section_theme">Search</p>
+      <div class="section_inner section_inner--reverse">
+        <img src="img/main/section_02.png" alt="section_02" />
+        <div class="section_text section_text--left">
+          <span class="section_theme">Search</span>
           <h2 class="title">구매를 원하는<br />상품을 검색하세요</h2>
           <p class="section_info">
             구매하고 싶은 물품을 검색해서 쉽게 찾아보세요
           </p>
-        </div>
-        <div class="section_img">
-          <img src="img/main/section_02.png" alt="section_02" />
         </div>
       </div>
     </section>
     <!--section03-->
     <section>
       <div class="section_inner">
-        <div class="section_img">
-          <img src="img/main/section_03.png" alt="section_03" />
-        </div>
-        <div class="section_text right">
-          <p class="section_theme">Register</p>
+        <img src="img/main/section_03.png" alt="section_03" />
+        <div class="section_text">
+          <span class="section_theme">Register</span>
           <h2 class="title">판매를 원하는<br />상품을 등록하세요</h2>
           <p class="section_info">
             어떤 물건이든 판매하고 싶은 상품을 쉽게 등록하세요
@@ -84,21 +73,17 @@
         </div>
       </div>
     </section>
-    <!--footer_ad-->
-    <div id="ad">
-      <div class="ad_inner">
-        <div class="ad_content">
-          <div class="ad_text">
-            <h2 class="title">믿을 수 있는<br />판다마켓 중고 거래</h2>
-          </div>
-          <div class="ad_img">
-            <img src="img/main/ad_footer_img.png" alt="ad_footer_img" />
-          </div>
+    <!--footer_hero_section-->
+    <div class="hero_section">
+      <div class="hero_section_inner">
+        <div class="hero_text">
+          <h2 class="title">믿을 수 있는<br />판다마켓 중고 거래</h2>
         </div>
+        <img src="img/main/hero_footer_img.png" alt="hero_image" />
       </div>
     </div>
     <!--footer-->
-    <footer>
+    <footer class="footer">
       <div class="footer_inner">
         <div class="footer_text">©codeit - 2024</div>
         <div class="footer_link">
@@ -109,23 +94,23 @@
           <ul class="footer_sns">
             <li>
               <a href="https://www.facebook.com/?locale=ko_KR">
-                <img src="img/SNS_icon/facebook_icon.png" alt="facebook_icon" />
+                <img src="img/sns_icon/facebook_icon.svg" alt="facebook_icon" />
               </a>
             </li>
             <li>
               <a href="https://x.com/?lang=ko ">
-                <img src="img/SNS_icon/twitter_icon.png" alt="twitter_icon" />
+                <img src="img/sns_icon/twitter_icon.svg" alt="twitter_icon" />
               </a>
             </li>
             <li>
               <a href="https://www.youtube.com/">
-                <img src="img/SNS_icon/youtube_icon.png" alt="youtube_icon" />
+                <img src="img/sns_icon/youtube_icon.svg" alt="youtube_icon" />
               </a>
             </li>
             <li>
               <a href="https://www.instagram.com/">
                 <img
-                  src="img/SNS_icon/instagram_icon.png"
+                  src="img/sns_icon/instagram_icon.svg"
                   alt="instagram_icon"
                 />
               </a>
