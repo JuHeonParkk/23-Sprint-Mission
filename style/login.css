@@ -39,6 +39,18 @@ input {
   padding: 0 24px;
   background-color: var(--secondary-100);
   border-color: transparent;
+  color: var(--secondary-800);
+}
+
+input:focus {
+  /* layout shifting: 테두리의 크기만큼 밀림
+    따라서 border 대신 outline으로 사용 */
+  /* border: 1px solid var(--primary-100); */
+  outline: 1px solid var(--primary-100);
+}
+
+input::placeholder {
+  color: var(--secondary-400);
 }
 
 .password_wrap {
