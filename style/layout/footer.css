@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  height: 160px;
+  background-color: var(--secondary-900);
+}
+
+.footer_inner {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 32px 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  white-space: nowrap;
+}
+
+.footer_link {
+  display: flex;
+  gap: 30px;
+  margin: 0 16px;
+  font-weight: 400;
+  color: var(--secondary-400);
+}
+
+.footer_sns {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
