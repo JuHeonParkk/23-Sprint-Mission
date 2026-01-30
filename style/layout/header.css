@@ -14,13 +14,13 @@ header {
   border-bottom: 1px solid #defefe;
 }
 
-.logo {
+.header_logo {
   display: flex;
   align-items: center;
   gap: 9px;
 }
 
-.logo img:first-child {
+.header_logo img:first-child {
   display: none;
 }
 
@@ -38,7 +38,7 @@ header {
     padding: 0 24px;
   }
 
-  .logo img:first-child {
+  .header_logo img:first-child {
     display: inline;
   }
 }
@@ -49,7 +49,7 @@ header {
     padding: 0 200px;
   }
 
-  .logo img:first-child {
+  .header_logo img:first-child {
     display: inline;
   }
 }

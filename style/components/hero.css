@@ -36,7 +36,7 @@
   text-align: center;
 }
 
-.fill-btn {
+.hero_btn {
   padding: 12px 71px;
 }
 
@@ -62,7 +62,7 @@
     height: auto;
   }
 
-  .fill-btn {
+  .hero_btn {
     padding: 16px 124px;
   }
 }
