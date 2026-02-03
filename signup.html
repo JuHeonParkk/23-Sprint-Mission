@@ -31,6 +31,7 @@
             required
             autofocus
           />
+          <p class="error_msg email--error_msg"></p>
         </div>
         <div class="input_item">
           <label for="nickname">닉네임</label>
@@ -40,6 +41,7 @@
             placeholder="닉네임을 입력해주세요"
             required
           />
+          <p class="error_msg nickname--error_msg"></p>
         </div>
         <div class="input_item">
           <label for="password">비밀번호</label>
@@ -57,6 +59,7 @@
               />
             </button>
           </div>
+          <p class="error_msg password--error_msg"></p>
         </div>
         <div class="input_item">
           <label for="password_confirm">비밀번호 확인</label>
@@ -74,6 +77,7 @@
               />
             </button>
           </div>
+          <p class="error_msg password_confirm--error_msg"></p>
         </div>
         <button type="submit" class="submit-login_btn btn" disabled>
           회원가입
@@ -97,5 +101,6 @@
         <a href="./login.html" class="login_btn">로그인</a>
       </div>
     </div>
+    <script src="./script/signup.js"></script>
   </body>
 </html>

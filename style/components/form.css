@@ -57,6 +57,10 @@ input::placeholder {
   outline: 1px solid var(--error);
 }
 
+.success_border {
+  outline: 1px solid var(--primary-100);
+}
+
 .password_wrap {
   position: relative;
   width: 100%;
