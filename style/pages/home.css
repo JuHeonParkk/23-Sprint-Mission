@@ -1,3 +1,12 @@
+/* login_btn */
+.main-login_btn {
+  padding: 11.5px 23px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* feature_section */
 .features_section {
   padding: 52px 16px;
 }
