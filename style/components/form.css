@@ -1,0 +1,56 @@
+.form {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.input_item {
+  margin-bottom: 24px;
+}
+
+.input_item label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.input_item input {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  padding: 0 24px;
+  background-color: var(--secondary-100);
+  border-color: transparent;
+  color: var(--secondary-800);
+}
+
+input:focus {
+  /* layout shifting: 테두리의 크기만큼 밀림
+    따라서 border 대신 outline으로 사용 */
+  /* border: 1px solid var(--primary-100); */
+  outline: 1px solid var(--primary-100);
+}
+
+input::placeholder {
+  color: var(--secondary-400);
+}
+
+.password_wrap {
+  position: relative;
+  width: 100%;
+}
+
+.password_icon {
+  position: absolute;
+  right: 24px;
+  top: 16px;
+  border: none;
+}
+
+.password_icon:hover {
+  cursor: pointer;
+}
