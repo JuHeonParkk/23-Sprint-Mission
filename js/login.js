@@ -16,6 +16,10 @@ emailInput.addEventListener("blur", (e) => {
   }
 });
 
+emailInput.addEventListener("focus", () => {
+  clearErrorMessage(emailInput);
+});
+
 passwordInput.addEventListener("blur", (e) => {
   const value = e.target.value.trim();
   if (!value) {
@@ -25,6 +29,10 @@ passwordInput.addEventListener("blur", (e) => {
   } else {
     return clearErrorMessage(passwordInput);
   }
+});
+
+passwordInput.addEventListener("focus", () => {
+  clearErrorMessage(passwordInput);
 });
 
 formElement.addEventListener("submit", (e) => {
@@ -40,7 +48,7 @@ function showErrorMessage(inputElement, message) {
   errorMessage.classList.add("visible");
 
   inputElement.classList.add("error_border");
-  checkFormValidity(inputElement);
+  checkFormValidity();
 }
 
 function clearErrorMessage(inputElement) {
@@ -50,7 +58,7 @@ function clearErrorMessage(inputElement) {
 
   inputElement.classList.remove("error_border");
 
-  checkFormValidity(inputElement);
+  checkFormValidity();
 }
 
 function checkFormValidity() {
