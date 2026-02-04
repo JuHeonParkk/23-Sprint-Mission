@@ -61,6 +61,7 @@ input::placeholder {
   outline: 1px solid var(--primary-100);
 }
 
+/* password_toggle */
 .password_wrap {
   position: relative;
   width: 100%;
@@ -71,6 +72,11 @@ input::placeholder {
   right: 24px;
   top: 16px;
   border: none;
+}
+
+.password_icon img {
+  width: 24px;
+  height: 24px;
 }
 
 .password_icon:hover {

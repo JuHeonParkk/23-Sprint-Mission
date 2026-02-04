@@ -1,3 +1,5 @@
+import { emailInput, passwordInput, submitBtn } from "./dom.js";
+
 export function showErrorMessage(inputElement, message) {
   const errorMessage = document.querySelector(`.${inputElement.id}--error_msg`);
   errorMessage.textContent = message;

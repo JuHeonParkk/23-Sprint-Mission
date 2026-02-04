@@ -52,10 +52,12 @@
               placeholder="비밀번호를 입력해주세요"
               required
             />
-            <button type="button" class="password_icon">
+            <button type="button" class="password_icon" data-target="password">
               <img
                 src="img/icon/password_hidden_icon.svg"
                 alt="password_hidden_icon"
+                data-visible="img/icon/password_visible_icon.svg"
+                data-hidden="img/icon/password_hidden_icon.svg"
               />
             </button>
           </div>
@@ -70,10 +72,16 @@
               placeholder="비밀번호를 다시 입력해주세요"
               required
             />
-            <button type="button" class="password_icon">
+            <button
+              type="button"
+              class="password_icon"
+              data-target="password_confirm"
+            >
               <img
                 src="img/icon/password_hidden_icon.svg"
                 alt="password_hidden_icon"
+                data-visible="img/icon/password_visible_icon.svg"
+                data-hidden="img/icon/password_hidden_icon.svg"
               />
             </button>
           </div>
@@ -101,6 +109,6 @@
         <a href="./login.html" class="login_btn">로그인</a>
       </div>
     </div>
-    <script src="./script/signup.js"></script>
+    <script type="module" src="./script/pages/signup.js"></script>
   </body>
 </html>
