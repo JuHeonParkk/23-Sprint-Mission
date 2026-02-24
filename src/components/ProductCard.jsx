@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import product from "../assets/logo_face.svg";
 import like from "../assets/like_default.svg";
 
 const Container = styled.div`
@@ -46,17 +45,17 @@ const LikeCount = styled.span`
   color: var(--secondary-600);
 `;
 
-export default function ProductCard() {
+export default function ProductCard({ product }) {
   return (
     <Container>
-      <ProductImg src={product} />
-      <ProductTitle>상품이름</ProductTitle>
-      <ProductPrice>000,000</ProductPrice>
+      <ProductImg src={product.image} />
+      <ProductTitle>{product.title}</ProductTitle>
+      <ProductPrice>{product.price.toLocaleString()}원</ProductPrice>
       <LikeContainer>
         <LikeButton>
           <img src={like} />
         </LikeButton>
-        <LikeCount>0,000</LikeCount>
+        <LikeCount>{product.likes.toLocaleString()}</LikeCount>
       </LikeContainer>
     </Container>
   );

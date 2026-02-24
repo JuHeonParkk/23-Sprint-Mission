@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
-import BestProducts from "../components/BestProducts";
-import AllProducts from "../components/AllProducts";
+import BestProductSection from "../components/BestProductSection";
+import AllProductSection from "../components/AllProductSection";
 
 export default function ProductsPage() {
   return (
     <div>
       <Header />
-      <BestProducts />
-      <AllProducts />
+      <BestProductSection />
+      <AllProductSection />
     </div>
   );
 }

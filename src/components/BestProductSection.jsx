@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ProductCard from "./ProductCard";
+import ProductGrid from "./ProductGrid";
+import useDevice from "../hook/useDevice";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -24,23 +25,18 @@ const ProductTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
-const ProductContainer = styled.div`
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-`;
+export default function BestProductSection() {
+  let count;
+  const device = useDevice();
 
-export default function BestProducts() {
+  if (device === "mobile") count = 1;
+  else if (device === "tablet") count = 2;
+  else count = 4;
+
   return (
     <Container>
       <ProductTitle>베스트 상품</ProductTitle>
-      <ProductContainer>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </ProductContainer>
+      <ProductGrid count={count} />
     </Container>
   );
 }

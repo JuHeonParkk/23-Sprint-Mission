@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import ProductCard from "./ProductCard";
 import SearchInput from "./SearchInput";
 import Button from "./Button";
 import SelectOption from "./SelectOption";
+import ProductGrid from "./ProductGrid";
 import arrowDown from "../assets/arrow_down.svg";
+import useDevice from "../hook/useDevice";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -61,7 +62,14 @@ const CustomSelectButton = styled.button`
   font-weight: 500;
 `;
 
-export default function AllProducts() {
+export default function AllProductSection() {
+  let count;
+  const device = useDevice();
+
+  if (device === "mobile") count = 2;
+  else if (device === "tablet") count = 3;
+  else count = 5;
+
   return (
     <Container>
       <ProductHeader>
@@ -79,12 +87,7 @@ export default function AllProducts() {
           </SelectOption>
         </CustomSelect>
       </ProductHeader>
-      <ProductContainer>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </ProductContainer>
+      <ProductGrid count={count} />
     </Container>
   );
 }
