@@ -36,7 +36,7 @@ export default function BestProductSection() {
   return (
     <Container>
       <ProductTitle>베스트 상품</ProductTitle>
-      <ProductGrid count={count} />
+      <ProductGrid count={count} isBest />
     </Container>
   );
 }

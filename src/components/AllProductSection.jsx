@@ -37,13 +37,6 @@ const ProductTitle = styled.h2`
   flex-grow: 1;
 `;
 
-const ProductContainer = styled.div`
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-`;
-
 const CustomSelect = styled.div`
   width: 130px;
   position: relative;

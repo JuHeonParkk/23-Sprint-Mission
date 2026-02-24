@@ -11,7 +11,9 @@ const Container = styled.div`
 `;
 
 const ProductImg = styled.img`
+  width: 100%;
   margin-bottom: 10px;
+  border-radius: 16px;
 `;
 
 const ProductTitle = styled.h3`
