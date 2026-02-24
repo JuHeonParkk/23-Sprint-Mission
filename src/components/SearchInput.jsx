@@ -11,9 +11,9 @@ const Container = styled.div`
 `;
 
 const SearchInputStyled = styled(Input)`
-  width: 325px;
+  width: 300px;
   height: 42px;
-  padding: 9px 20px 9px 44px;
+  padding: 9px 16px 9px 44px;
 `;
 
 const Icon = styled.img`
