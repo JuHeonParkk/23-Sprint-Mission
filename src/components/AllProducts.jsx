@@ -73,7 +73,6 @@ export default function AllProducts() {
             <span>최신순</span>
             <img src={arrowDown} alt="select_arrow" />
           </CustomSelectButton>
-
           <SelectOption>
             <li value="createAt">최신순</li>
             <li value="favorite">좋아요순</li>
