@@ -25,7 +25,7 @@ const ProductTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
-export default function BestProductSection() {
+export default function BestProductSection({ sortedProducts }) {
   let count;
   const device = useDevice();
 
@@ -33,10 +33,16 @@ export default function BestProductSection() {
   else if (device === "tablet") count = 2;
   else count = 4;
 
+  console.log("BestProductSection", sortedProducts);
+
   return (
     <Container>
       <ProductTitle>베스트 상품</ProductTitle>
-      <ProductGrid count={count} isBest />
+      <ProductGrid
+        count={count}
+        isBest
+        products={sortedProducts.slice(0, count)}
+      />
     </Container>
   );
 }

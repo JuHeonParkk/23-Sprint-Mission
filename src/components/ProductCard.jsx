@@ -12,6 +12,7 @@ const Container = styled.div`
 
 const ProductImg = styled.img`
   width: 100%;
+  height: 100%;
   margin-bottom: 10px;
   border-radius: 16px;
 `;
@@ -48,16 +49,18 @@ const LikeCount = styled.span`
 `;
 
 export default function ProductCard({ product }) {
+  const { images, name, price, favoriteCount } = product;
+
   return (
     <Container>
-      <ProductImg src={product.image} />
-      <ProductTitle>{product.title}</ProductTitle>
-      <ProductPrice>{product.price.toLocaleString()}원</ProductPrice>
+      <ProductImg src={images} alt={name} />
+      <ProductTitle>{name}</ProductTitle>
+      <ProductPrice>{price.toLocaleString()}원</ProductPrice>
       <LikeContainer>
         <LikeButton>
           <img src={like} />
         </LikeButton>
-        <LikeCount>{product.likes.toLocaleString()}</LikeCount>
+        <LikeCount>{favoriteCount.toLocaleString()}</LikeCount>
       </LikeContainer>
     </Container>
   );

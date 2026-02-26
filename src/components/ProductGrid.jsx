@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import products from "../mock.json";
 
 const Container = styled.div`
   display: grid;
@@ -10,14 +9,14 @@ const Container = styled.div`
   gap: 40px 24px;
 `;
 
-export default function ProductGrid({ count, isBest }) {
-  const productList = isBest
-    ? products.products.slice(0, count)
-    : products.products;
+export default function ProductGrid({ count, isBest, products }) {
+  // console.log("ProductGrid", products);
+  // const productList = isBest ? products.slice(0, count) : products;
 
+  console.log("ProductGrid", products);
   return (
     <Container count={count} isBest={isBest}>
-      {productList.map((product) => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </Container>
