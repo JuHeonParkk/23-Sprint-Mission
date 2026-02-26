@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import like from "../assets/like_default.svg";
+import placeholderImage from "../assets/placeholderImage.svg";
 
 const Container = styled.div`
   display: flex;
@@ -53,12 +54,15 @@ export default function ProductCard({ product }) {
 
   return (
     <Container>
-      <ProductImg src={images} alt={name} />
+      <ProductImg
+        src={images && images.length > 0 ? images[0] : placeholderImage}
+        alt={name}
+      />
       <ProductTitle>{name}</ProductTitle>
       <ProductPrice>{price.toLocaleString()}원</ProductPrice>
       <LikeContainer>
         <LikeButton>
-          <img src={like} />
+          <img src={like} alt="like" />
         </LikeButton>
         <LikeCount>{favoriteCount.toLocaleString()}</LikeCount>
       </LikeContainer>
