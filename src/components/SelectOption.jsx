@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-const SelectOption = styled.ul`
+const Container = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
+  width: 130px;
   margin-top: 8px;
+  background-color: #ffffff;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   color: var(--secondary-800);
   font-size: 16px;
   font-weight: 500;
-  display: none;
 
   ${"li"} {
     width: 100%;
@@ -25,5 +25,16 @@ const SelectOption = styled.ul`
     }
   }
 `;
+
+function SelectOption({ isOpen }) {
+  if (!isOpen) return null;
+
+  return (
+    <Container>
+      <li value="createAt">최신순</li>
+      <li value="favorite">좋아요순</li>
+    </Container>
+  );
+}
 
 export default SelectOption;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProductGrid from "./ProductGrid";
 import useDevice from "../hook/useDevice";
 import ProductHeader from "./ProductHeader";
-import MobileProductHeader from "./MobileProductHeader";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -29,7 +28,7 @@ export default function AllProductSection() {
 
   return (
     <Container>
-      {device === "mobile" ? <MobileProductHeader /> : <ProductHeader />}
+      <ProductHeader device={device} />
       <ProductGrid count={count} />
     </Container>
   );
