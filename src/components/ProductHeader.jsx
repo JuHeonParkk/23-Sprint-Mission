@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import arrowDown from "../assets/arrow_down.svg";
 import arrowDownMobile from "../assets/mobile_arrow_down.svg";
@@ -51,8 +51,9 @@ const ProductTitle = styled.h2`
 const SubmitButton = styled(Button)``;
 
 const CustomSelect = styled.div`
-  width: 130px;
+  min-width: 130px;
   position: relative;
+  align-items: center;
   border-radius: 12px;
   padding: 12px 20px;
   border: 1px solid #e5e7eb;
@@ -67,6 +68,7 @@ const CustomSelect = styled.div`
 `;
 
 const CustomSelectButton = styled.button`
+  width: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,8 +85,27 @@ const CustomSelectButton = styled.button`
   }
 `;
 
-export default function ProductHeader({ device }) {
+export default function ProductHeader({ device, order, setOrder }) {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  const handleSelect = (value) => {
+    setOrder(value);
+    setIsOptionOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (selectRef.current && !selectRef.current.contains(e.target)) {
+        setIsOptionOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Container>
@@ -94,19 +115,40 @@ export default function ProductHeader({ device }) {
       </LeftContainer>
       <RightContainer>
         <SubmitButton>상품 등록하기</SubmitButton>
-        <CustomSelect>
-          <CustomSelectButton onClick={() => setIsOptionOpen(!isOptionOpen)}>
+        <CustomSelect ref={selectRef}>
+          <CustomSelectButton
+            onClick={() => {
+              setIsOptionOpen(!isOptionOpen);
+            }}
+          >
             {device !== "mobile" ? (
               <>
-                <span>최신순</span>
+                <span>{order === "createdAt" ? "최신순" : "좋아요순"}</span>
                 <img src={arrowDown} alt="select_arrow" />
               </>
             ) : (
-              <img src={arrowDownMobile} alt="select_arrow" />
+              <img src={arrowDownMobile} alt="select_arrow_mobile" />
             )}
           </CustomSelectButton>
 
-          <SelectOption isOpen={isOptionOpen} />
+          {isOptionOpen && (
+            <SelectOption>
+              <li
+                value="createdAt"
+                onClick={() => {
+                  handleSelect("createdAt");
+                }}
+              >
+                최신순
+              </li>
+              <li
+                value="favorite"
+                onClick={() => handleSelect("favoriteCount")}
+              >
+                좋아요순
+              </li>
+            </SelectOption>
+          )}
         </CustomSelect>
       </RightContainer>
     </Container>

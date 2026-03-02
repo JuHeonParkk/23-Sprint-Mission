@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ProductGrid from "./ProductGrid";
 import useDevice from "../hook/useDevice";
+import ProductCard from "./ProductCard";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -25,7 +25,14 @@ const ProductTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
-export default function BestProductSection({ sortedProducts }) {
+const ProductGrid = styled.div`
+  display: grid;
+  grid-template-columns: ${({ count, $isBest }) =>
+    $isBest ? `repeat(${count}, 1fr)` : `repeat(${count}, 1fr)`};
+  gap: 40px 24px;
+`;
+
+export default function BestProductSection({ products }) {
   let count;
   const device = useDevice();
 
@@ -33,16 +40,18 @@ export default function BestProductSection({ sortedProducts }) {
   else if (device === "tablet") count = 2;
   else count = 4;
 
-  console.log("BestProductSection", sortedProducts);
+  const bestProducts = [...products]
+    .sort((a, b) => b.favoriteCount - a.favoriteCount)
+    .slice(0, count);
 
   return (
     <Container>
       <ProductTitle>베스트 상품</ProductTitle>
-      <ProductGrid
-        count={count}
-        isBest
-        products={sortedProducts.slice(0, count)}
-      />
+      <ProductGrid count={count} $isBest={true}>
+        {bestProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </ProductGrid>
     </Container>
   );
 }
