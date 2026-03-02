@@ -123,7 +123,7 @@ export default function ProductHeader({ device, order, setOrder }) {
           >
             {device !== "mobile" ? (
               <>
-                <span>{order === "createdAt" ? "최신순" : "좋아요순"}</span>
+                <span>{order === "recent" ? "최신순" : "좋아요순"}</span>
                 <img src={arrowDown} alt="select_arrow" />
               </>
             ) : (
@@ -134,17 +134,14 @@ export default function ProductHeader({ device, order, setOrder }) {
           {isOptionOpen && (
             <SelectOption>
               <li
-                value="createdAt"
+                value="recent"
                 onClick={() => {
-                  handleSelect("createdAt");
+                  handleSelect("recent");
                 }}
               >
                 최신순
               </li>
-              <li
-                value="favorite"
-                onClick={() => handleSelect("favoriteCount")}
-              >
+              <li value="favorite" onClick={() => handleSelect("favorite")}>
                 좋아요순
               </li>
             </SelectOption>

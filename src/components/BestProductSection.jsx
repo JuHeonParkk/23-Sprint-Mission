@@ -27,9 +27,15 @@ const ProductTitle = styled.h2`
 
 const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: ${({ count, $isBest }) =>
-    $isBest ? `repeat(${count}, 1fr)` : `repeat(${count}, 1fr)`};
+  grid-template-columns: repeat(1, 1fr);
   gap: 40px 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 export default function BestProductSection({ products }) {
@@ -40,15 +46,15 @@ export default function BestProductSection({ products }) {
   else if (device === "tablet") count = 2;
   else count = 4;
 
-  const bestProducts = [...products]
-    .sort((a, b) => b.favoriteCount - a.favoriteCount)
-    .slice(0, count);
+  // const bestProducts = [...products]
+  //   .sort((a, b) => b.favoriteCount - a.favoriteCount)
+  //   .slice(0, count);
 
   return (
     <Container>
       <ProductTitle>베스트 상품</ProductTitle>
       <ProductGrid count={count} $isBest={true}>
-        {bestProducts.map((product) => (
+        {products.slice(0, count).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </ProductGrid>

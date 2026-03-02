@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import AllProductSection from "../components/AllProductSection";
 import BestProductSection from "../components/BestProductSection";
 import axios from "../api/index.js";
+import useDevice from "../hook/useDevice";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -27,28 +28,48 @@ const ProductTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
+const LIMIT = 10;
+
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [bestProducts, setBestProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [totalCount, setTotalCount] = useState(0); // 전체 상품 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-  const [order, setOrder] = useState("createdAt"); // 정렬 기준 상태
+  const [order, setOrder] = useState("recent"); // 정렬 기준 상태
 
-  const LIMIT = 10;
-
-  const handleLoad = async (orderParams, pageParams) => {
+  // 베스트 상품을 가져오는 함수
+  const handleBestProductsLoad = async () => {
     try {
       const response = await axios.get(`/products`, {
         params: {
-          order: orderParams, // 정렬 기준을 쿼리 파라미터로 전달
+          page: 1,
+          pageSize: LIMIT,
+          orderBy: "favorite",
+        },
+      });
+      const { list } = response.data;
+      if (!list) return;
+      setBestProducts(list);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // 전체 상품을 가져오는 함수
+  const handleAllProductsLoad = async (orderParams, pageParams) => {
+    try {
+      const response = await axios.get(`/products`, {
+        params: {
           page: pageParams,
-          limit: LIMIT, // 페이지당 상품 수
+          pageSize: LIMIT,
+          orderBy: orderParams, // 정렬 기준을 쿼리 파라미터로 전달
         },
       });
       const { list, totalCount } = response.data;
 
       if (!list) return;
 
-      setProducts(list);
+      setAllProducts(list);
       setTotalCount(totalCount);
     } catch (err) {
       console.error(err);
@@ -56,22 +77,25 @@ export default function ProductsPage() {
   };
 
   useEffect(() => {
-    handleLoad(order, currentPage);
-  }, [order, currentPage]);
+    handleBestProductsLoad();
+  }, []);
 
-  // const sortedProducts = [...products].sort((a, b) => b[order] - a[order]); // 좋아요순으로
+  useEffect(() => {
+    handleAllProductsLoad(order, currentPage);
+  }, [order, currentPage]);
 
   return (
     <div>
       <Header />
-      <BestProductSection products={products} />
+      <BestProductSection products={bestProducts} />
       <AllProductSection
-        products={products}
+        products={allProducts}
         order={order}
         setOrder={setOrder}
         totalCount={totalCount}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        pageSize={LIMIT}
       />
     </div>
   );
