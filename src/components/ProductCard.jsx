@@ -14,6 +14,7 @@ const Container = styled.div`
 const ProductImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
   margin-bottom: 10px;
   border-radius: 16px;
 `;
