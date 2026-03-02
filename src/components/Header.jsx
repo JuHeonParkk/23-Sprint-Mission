@@ -4,7 +4,7 @@ import logoFace from "../assets/logo_face.svg";
 import logoText from "../assets/logo_text.svg";
 import profile from "../assets/profile.svg";
 import Button from "./Button";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -88,6 +88,8 @@ const ProfileButton = styled(Button)`
 
 export default function Header() {
   const isLogin = false;
+  const location = useLocation();
+  const showNav = location.pathname === "/items";
 
   function getStyle({ isActive }) {
     return {
@@ -98,23 +100,25 @@ export default function Header() {
   return (
     <HeaderContainer>
       <h1>
-        <LinkLogo to="#">
+        <LinkLogo to="/">
           <LogoFace src={logoFace} alt="logo_face" />
           <LogoText src={logoText} alt="logo_text" />
         </LinkLogo>
       </h1>
-      <LinkNav>
-        <li>
-          <NavLink to="/" style={getStyle}>
-            자유게시판
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/items" style={getStyle}>
-            중고마켓
-          </NavLink>
-        </li>
-      </LinkNav>
+      {showNav && (
+        <LinkNav>
+          <li>
+            <NavLink to="/" style={getStyle}>
+              자유게시판
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/items" style={getStyle}>
+              중고마켓
+            </NavLink>
+          </li>
+        </LinkNav>
+      )}
       <ProfileContainer>
         <ProfileButton>
           {isLogin ? <img src={profile} alt="profile" /> : "로그인"}
