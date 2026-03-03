@@ -85,19 +85,19 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="https://x.com/?lang=ko ">
+            <a href="https://x.com/?lang=ko ">
               <img src={twitterIcon} alt="twitter_icon" />
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="https://www.youtube.com/">
+            <a href="https://www.youtube.com/">
               <img src={youtubeIcon} alt="youtube_icon" />
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="https://www.instagram.com/">
+            <a href="https://www.instagram.com/">
               <img src={instagramIcon} alt="instagram_icon" />
-            </Link>
+            </a>
           </li>
         </FooterSns>
       </ContentInner>

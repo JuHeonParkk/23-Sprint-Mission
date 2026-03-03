@@ -123,7 +123,7 @@ export default function Header() {
         </LinkNav>
       )}
       <ProfileContainer>
-        <ProfileButton>
+        <ProfileButton as={Link} to="/login">
           {isLogin ? <img src={profile} alt="profile" /> : "로그인"}
         </ProfileButton>
       </ProfileContainer>

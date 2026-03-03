@@ -14,6 +14,12 @@ const Button = styled.button`
   &:hover {
     background-color: var(--primary-200);
   }
+
+  &:disabled {
+    background-color: var(--secondary-400);
+    color: var(--secondary-200);
+    cursor: not-allowed;
+  }
 `;
 
 export default Button;
