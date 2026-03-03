@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import passwordHiddenIcon from "../assets/icon/password_hidden_icon.svg";
-import passwordVisibleIcon from "../assets/icon/password_visible_icon.svg";
+import LogoHeader from "../components/LogoHeader";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import SocialLogin from "../components/SocialLogin";
+import passwordHiddenIcon from "../assets/icon/password_hidden_icon.svg";
+import passwordVisibleIcon from "../assets/icon/password_visible_icon.svg";
 import useValidation from "../hook/useValidation";
-import LogoHeader from "../components/LogoHeader";
 
 const Container = styled.div`
   width: 100%;
@@ -18,6 +18,17 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const Header = styled.div`
+  margin: 60px 0 40px 0;
+  text-align: center;
+  & img {
+    width: 198px;
+    @media (min-width: 768px) {
+      width: 396px;
+    }
+  }
 `;
 
 const Form = styled.form`
@@ -66,7 +77,7 @@ const SubmitButton = styled(Button)`
   border-radius: 9999px;
 `;
 
-const SignupLink = styled.div`
+const LoginLink = styled.div`
   & span {
     padding-right: 4px;
     font-size: 14px;
@@ -87,26 +98,42 @@ const ErrorMessage = styled.p`
   display: ${({ show }) => (show ? "block" : "none")};
 `;
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [nicknameError, setNicknameError] = useState("");
+  const [passwordConfirmError, setPasswordConfirmError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const { emailRegex, validateEmail, validatePassword } = useValidation();
+  const {
+    emailRegex,
+    validateEmail,
+    validatePassword,
+    validatePasswordConfirm,
+    validateNickname,
+  } = useValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setEmailError(validateEmail(email));
+    setNicknameError(validateNickname(nickname));
     setPasswordError(validatePassword(password));
+    setPasswordConfirmError(validatePasswordConfirm(password, passwordConfirm));
   };
 
   const isFormValid =
     email.trim() !== "" &&
     emailRegex.test(email) &&
     password.trim() !== "" &&
-    password.length >= 8;
+    password.length >= 8 &&
+    nickname.trim() !== "" &&
+    passwordConfirm.trim() !== "" &&
+    password === passwordConfirm;
 
   return (
     <Container>
@@ -117,18 +144,33 @@ export default function LoginPage() {
           <Input
             type="email"
             id="email"
-            value={email}
+            placeholder="이메일을 입력해주세요"
+            required
+            autoFocus
+            show={!!emailError}
             onChange={(e) => {
               setEmail(e.target.value);
               setEmailError("");
             }}
             onBlur={() => setEmailError(validateEmail(email))}
-            placeholder="이메일을 입력해주세요"
-            required
-            autoFocus
-            show={!!emailError}
           />
           <ErrorMessage show={!!emailError}>{emailError}</ErrorMessage>
+        </InputItem>
+        <InputItem>
+          <Label htmlFor="nickname">닉네임</Label>
+          <Input
+            type="text"
+            id="nickname"
+            placeholder="닉네임을 입력해주세요"
+            required
+            show={!!nicknameError}
+            onChange={(e) => {
+              setNickname(e.target.value);
+              setNicknameError("");
+            }}
+            onBlur={() => setNicknameError(validateNickname(nickname))}
+          />
+          <ErrorMessage show={!!nicknameError}>{nicknameError}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="password">비밀번호</Label>
@@ -136,15 +178,14 @@ export default function LoginPage() {
             <Input
               type={showPassword ? "text" : "password"}
               id="password"
-              value={password}
+              placeholder="비밀번호를 입력해주세요"
+              required
+              show={!!passwordError}
               onChange={(e) => {
                 setPassword(e.target.value);
                 setPasswordError("");
               }}
               onBlur={() => setPasswordError(validatePassword(password))}
-              placeholder="비밀번호를 입력해주세요"
-              required
-              show={!!passwordError}
             />
             <button
               type="button"
@@ -158,19 +199,54 @@ export default function LoginPage() {
           </PasswordContainer>
           <ErrorMessage show={!!passwordError}>{passwordError}</ErrorMessage>
         </InputItem>
+        <InputItem>
+          <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
+          <PasswordContainer>
+            <Input
+              type={showPasswordConfirm ? "text" : "password"}
+              id="passwordConfirm"
+              placeholder="비밀번호를 다시 한 번 입력해주세요"
+              required
+              show={!!passwordConfirmError}
+              onChange={(e) => {
+                setPasswordConfirm(e.target.value);
+                setPasswordConfirmError("");
+              }}
+              onBlur={() =>
+                setPasswordConfirmError(
+                  validatePasswordConfirm(password, passwordConfirm),
+                )
+              }
+            />
+            <button
+              type="button"
+              onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+            >
+              <img
+                src={
+                  showPasswordConfirm ? passwordVisibleIcon : passwordHiddenIcon
+                }
+                alt="passwordToggleIcon"
+              />
+            </button>
+          </PasswordContainer>
+          <ErrorMessage show={!!passwordConfirmError}>
+            {passwordConfirmError}
+          </ErrorMessage>
+        </InputItem>
         <SubmitButton
           type="submit"
           onClick={handleSubmit}
           disabled={!isFormValid}
         >
-          로그인
+          회원가입
         </SubmitButton>
       </Form>
       <SocialLogin />
-      <SignupLink>
-        <span>판다마켓이 처음이신가요?</span>
-        <Link to="/signup">회원가입</Link>
-      </SignupLink>
+      <LoginLink>
+        <span>이미 회원이신가요?</span>
+        <Link to="/login">로그인</Link>
+      </LoginLink>
     </Container>
   );
 }

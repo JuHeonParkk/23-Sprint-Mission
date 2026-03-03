@@ -1,32 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import Header from "../components/Header";
 import AllProductSection from "../components/AllProductSection";
 import BestProductSection from "../components/BestProductSection";
 import axios from "../api/index.js";
-import useDevice from "../hook/useDevice";
-
-const Container = styled.div`
-  margin: 0 auto;
-  padding: 0 16px;
-
-  @media (min-width: 768px) {
-    padding: 0 24px;
-    margin-top: 24px;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 0 200px;
-  }
-`;
-
-const ProductTitle = styled.h2`
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary-900);
-  margin-top: 24px;
-  margin-bottom: 16px;
-`;
 
 const LIMIT = 10;
 
