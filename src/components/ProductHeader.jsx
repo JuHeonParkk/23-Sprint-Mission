@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import arrowDown from "../assets/arrow_down.svg";
 import arrowDownMobile from "../assets/mobile_arrow_down.svg";
@@ -114,7 +115,9 @@ export default function ProductHeader({ device, order, setOrder }) {
         <SearchInput />
       </LeftContainer>
       <RightContainer>
-        <SubmitButton>상품 등록하기</SubmitButton>
+        <SubmitButton as={Link} to="/additem">
+          상품 등록하기
+        </SubmitButton>
         <CustomSelect ref={selectRef}>
           <CustomSelectButton
             onClick={() => {
