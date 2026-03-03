@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import logoFace from "../assets/logo_face.svg";
-import logoText from "../assets/logo_text.svg";
-import profile from "../assets/profile.svg";
+import logoFace from "../assets/common/logo_face.svg";
+import logoText from "../assets/common/logo_text.svg";
+import profile from "../assets/common/profile.svg";
 import Button from "./Button";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
@@ -16,6 +16,9 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   background-color: var(--bg-white);
   border-bottom: 1px solid #dfdfdf;
+  position: sticky;
+  top: 0;
+  left: 0;
 
   @media (min-width: 768px) {
     padding: 0 24px;
