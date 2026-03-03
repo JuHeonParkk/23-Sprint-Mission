@@ -19,6 +19,7 @@ const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
   left: 0;
+  z-index: 1000;
 
   @media (min-width: 768px) {
     padding: 0 24px;

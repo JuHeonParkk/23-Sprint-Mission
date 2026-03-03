@@ -88,12 +88,7 @@ export default function AllProductSection({
   setCurrentPage,
   pageSize,
 }) {
-  let count;
   const device = useDevice();
-
-  if (device === "mobile") count = 4;
-  else if (device === "tablet") count = 6;
-  else count = 10;
 
   const pageGroupSize = 5;
   const currentGroup = Math.ceil(currentPage / pageGroupSize); // 현재 페이지 그룹
@@ -111,7 +106,7 @@ export default function AllProductSection({
     <Container>
       <ProductHeader device={device} order={order} setOrder={setOrder} />
       <ProductGrid>
-        {products.slice(0, count).map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </ProductGrid>

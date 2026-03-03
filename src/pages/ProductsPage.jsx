@@ -3,8 +3,7 @@ import Header from "../components/Header";
 import AllProductSection from "../components/AllProductSection";
 import BestProductSection from "../components/BestProductSection";
 import axios from "../api/index.js";
-
-const LIMIT = 10;
+import useDevice from "../hook/useDevice";
 
 export default function ProductsPage() {
   const [bestProducts, setBestProducts] = useState([]);
@@ -12,6 +11,13 @@ export default function ProductsPage() {
   const [totalCount, setTotalCount] = useState(0); // 전체 상품 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [order, setOrder] = useState("recent"); // 정렬 기준 상태
+
+  let LIMIT = 10;
+  const device = useDevice();
+
+  if (device === "mobile") LIMIT = 4;
+  else if (device === "tablet") LIMIT = 6;
+  else LIMIT = 10;
 
   // 베스트 상품을 가져오는 함수
   const handleBestProductsLoad = async () => {
@@ -58,7 +64,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     handleAllProductsLoad(order, currentPage);
-  }, [order, currentPage]);
+  }, [order, currentPage, device]);
 
   return (
     <div>
