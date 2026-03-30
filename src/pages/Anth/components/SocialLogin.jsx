@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import googleIcon from "../assets/icon/google_icon.svg";
-import kakaoIcon from "../assets/icon/kakao_icon.svg";
+import googleIcon from "@/assets/icon/google_icon.svg";
+import kakaoIcon from "@/assets/icon/kakao_icon.svg";
 
 const Container = styled.div`
   width: 100%;

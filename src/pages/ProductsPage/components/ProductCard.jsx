@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import like from "../assets/like_default.svg";
-import placeholderImage from "../assets/placeholderImage.svg";
+import like from "@/assets/like.svg";
+import placeholderImage from "@/assets/placeholderImage.svg";
 
 const Container = styled.div`
   display: flex;

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import arrowDown from "../assets/arrow_down.svg";
-import arrowDownMobile from "../assets/mobile_arrow_down.svg";
-import Button from "./Button";
-import SearchInput from "./SearchInput";
-import SelectOption from "./SelectOption";
+
+import Button from "@/components/Button";
+import SearchInput from "@/components/SearchInput";
+import SelectOption from "@/components/SelectOption";
+
+import arrowDown from "@/assets/arrow_down.svg";
+import arrowDownMobile from "@/assets/mobile_arrow_down.svg";
 
 const Container = styled.div`
   display: flex;

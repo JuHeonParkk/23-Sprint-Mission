@@ -93,7 +93,8 @@ const ProfileButton = styled(Button)`
 export default function Header() {
   const isLogin = false;
   const location = useLocation();
-  const showNav = location.pathname === "/items";
+  const showNav =
+    location.pathname === "/items" || location.pathname === "/additem";
 
   return (
     <HeaderContainer>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import useDevice from "../hooks/useDevice";
+import useDevice from "@/hooks/useDevice";
 import ProductCard from "./ProductCard";
 
 const Container = styled.div`

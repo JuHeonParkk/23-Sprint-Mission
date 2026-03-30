@@ -1,10 +1,11 @@
-import React from "react";
 import styled from "styled-components";
-import useDevice from "../hooks/useDevice";
-import getPagination from "../utils/getPagination";
+import useDevice from "@/hooks/useDevice";
+import getPagination from "@/utils/getPagination";
+
 import ProductHeader from "./ProductHeader";
 import ProductCard from "./ProductCard";
-import arrowRight from "../assets/arrow_right.svg";
+
+import arrowRight from "@/assets/arrow_right.svg";
 
 const Container = styled.div`
   margin: 0 auto;
