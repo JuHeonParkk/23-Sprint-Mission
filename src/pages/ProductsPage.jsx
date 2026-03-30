@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import AllProductSection from "../components/AllProductSection";
 import BestProductSection from "../components/BestProductSection";
 import axios from "../api/index.js";
-import useDevice from "../hook/useDevice";
+import useDevice from "../hooks/useDevice";
 
 export default function ProductsPage() {
   const [bestProducts, setBestProducts] = useState([]);

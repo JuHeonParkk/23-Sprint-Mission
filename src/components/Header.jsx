@@ -95,12 +95,6 @@ export default function Header() {
   const location = useLocation();
   const showNav = location.pathname === "/items";
 
-  function getStyle({ isActive }) {
-    return {
-      color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
-    };
-  }
-
   return (
     <HeaderContainer>
       <h1>
@@ -112,12 +106,22 @@ export default function Header() {
       {showNav && (
         <LinkNav>
           <li>
-            <NavLink to="/" style={getStyle}>
+            <NavLink
+              to="/"
+              style={({ isActive }) => ({
+                color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
+              })}
+            >
               자유게시판
             </NavLink>
           </li>
           <li>
-            <NavLink to="/items" style={getStyle}>
+            <NavLink
+              to="/items"
+              style={({ isActive }) => ({
+                color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
+              })}
+            >
               중고마켓
             </NavLink>
           </li>

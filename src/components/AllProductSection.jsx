@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import useDevice from "../hook/useDevice";
+import useDevice from "../hooks/useDevice";
 import getPagination from "../utils/getPagination";
 import ProductHeader from "./ProductHeader";
 import ProductCard from "./ProductCard";
@@ -99,6 +99,11 @@ export default function AllProductSection({
     pageGroupSize: PAGE_GROUP_SIZE,
   });
 
+  const pages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, index) => startPage + index,
+  );
+
   return (
     <Container>
       <ProductHeader device={device} order={order} setOrder={setOrder} />
@@ -114,10 +119,7 @@ export default function AllProductSection({
         >
           <img src={arrowRight} alt="prev_button" />
         </ArrowButton>
-        {Array.from(
-          { length: endPage - startPage + 1 },
-          (_, index) => startPage + index,
-        ).map((page) => (
+        {pages.map((page) => (
           <NumberButton
             key={page}
             onClick={() => setCurrentPage(page)}

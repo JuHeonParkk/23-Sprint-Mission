@@ -50,9 +50,9 @@ const LikeCount = styled.span`
   color: var(--secondary-600);
 `;
 
-export default function ProductCard({ product }) {
-  const { images, name, price, favoriteCount } = product;
-
+export default function ProductCard({
+  product: { images, name, price, favoriteCount },
+}) {
   return (
     <Container>
       <ProductImg

@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import SocialLogin from "../components/SocialLogin";
 import passwordHiddenIcon from "../assets/icon/password_hidden_icon.svg";
 import passwordVisibleIcon from "../assets/icon/password_visible_icon.svg";
-import useValidation from "../hook/useValidation";
+import validations from "../utils/validations";
 
 const Container = styled.div`
   width: 100%;
@@ -116,7 +116,7 @@ export default function SignupPage() {
     validatePassword,
     validatePasswordConfirm,
     validateNickname,
-  } = useValidation();
+  } = validations();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -6,7 +6,7 @@ import passwordVisibleIcon from "../assets/icon/password_visible_icon.svg";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import SocialLogin from "../components/SocialLogin";
-import useValidation from "../hook/useValidation";
+import validations from "../utils/validations";
 import LogoHeader from "../components/LogoHeader";
 
 const Container = styled.div`
@@ -94,7 +94,7 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { emailRegex, validateEmail, validatePassword } = useValidation();
+  const { emailRegex, validateEmail, validatePassword } = validations();
 
   const handleSubmit = (e) => {
     e.preventDefault();

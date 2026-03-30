@@ -30,10 +30,10 @@ export default function SocialLogin() {
       <span>간편 로그인하기</span>
       <SocialLoginButtons>
         <a href="https://www.google.com/">
-          <img src={googleIcon} alt="google_icon" />
+          <img src={googleIcon} alt="구글 아이콘" />
         </a>
         <a href="https://www.kakaocorp.com/page/">
-          <img src={kakaoIcon} alt="kakao_icon" />
+          <img src={kakaoIcon} alt="카카오 아이콘" />
         </a>
       </SocialLoginButtons>
     </Container>
