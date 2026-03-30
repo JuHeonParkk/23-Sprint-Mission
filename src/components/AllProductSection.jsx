@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import useDevice from "../hook/useDevice";
+import getPagination from "../utils/getPagination";
 import ProductHeader from "./ProductHeader";
 import ProductCard from "./ProductCard";
 import arrowRight from "../assets/arrow_right.svg";
@@ -79,6 +80,8 @@ const NumberButton = styled.li`
   }
 `;
 
+const PAGE_GROUP_SIZE = 5;
+
 export default function AllProductSection({
   order,
   setOrder,
@@ -89,18 +92,12 @@ export default function AllProductSection({
   pageSize,
 }) {
   const device = useDevice();
-
-  const pageGroupSize = 5;
-  const currentGroup = Math.ceil(currentPage / pageGroupSize); // 현재 페이지 그룹
-  const startPage = (currentGroup - 1) * pageGroupSize + 1; // 페이지 그룹의 시작 페이지
-  const endPage = Math.min(
-    startPage + pageGroupSize - 1,
-    Math.ceil(totalCount / pageSize),
-  ); // 페이지 그룹의 끝 페이지 (전체 페이지 수를 넘지 않도록)
-
-  const totalPages = Math.ceil(totalCount / pageSize); // 전체 페이지 수 계산
-  const noPrev = currentPage === 1;
-  const noNext = currentPage === totalPages;
+  const { startPage, endPage, noPrev, noNext } = getPagination({
+    currentPage,
+    totalCount,
+    pageSize,
+    pageGroupSize: PAGE_GROUP_SIZE,
+  });
 
   return (
     <Container>
