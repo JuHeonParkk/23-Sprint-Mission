@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import logoFace from "../assets/common/logo_face.svg";
-import logoText from "../assets/common/logo_text.svg";
-import profile from "../assets/common/profile.svg";
+import logoFace from "@/assets/common/logo_face.svg";
+import logoText from "@/assets/common/logo_text.svg";
+import profile from "@/assets/common/profile.svg";
 import Button from "./Button";
 import { Link, NavLink, useLocation } from "react-router-dom";
 

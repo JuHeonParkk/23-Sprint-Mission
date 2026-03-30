@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import like from "@/assets/like.svg";
+import like from "@/assets/icon/like.svg";
 import placeholderImage from "@/assets/placeholderImage.svg";
 
 const Container = styled.div`
