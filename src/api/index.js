@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const instance = Axios.create({
-  baseURL: "https://panda-market-api.vercel.app/",
+  baseURL: `${import.meta.env.VITE_PANDA_MARKET_BASE_URL}`,
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
