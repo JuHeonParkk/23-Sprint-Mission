@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
@@ -5,8 +6,9 @@ import Button from "@/components/Button";
 
 import FormField from "./components/FormField";
 import FileInput from "./components/FileInput";
+import Tag from "./components/Tag";
 
-const Container = styled.div`
+const FormContainer = styled.form`
   width: 100%;
   margin: 0 auto;
   padding: 0 24px;
@@ -57,30 +59,103 @@ const Textarea = styled.textarea`
 `;
 
 export default function AddItemPage() {
+  const [productName, setProductName] = useState("");
+  const [productInfo, setProductInfo] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [tags, setTags] = useState([]);
+  const [productTags, setProductTags] = useState("");
+  const [isButtonActive, setIsButtonActive] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "productName") {
+      setProductName(value);
+    } else if (name === "productInfo") {
+      setProductInfo(value);
+    } else if (name === "productPrice") {
+      setProductPrice(value);
+    } else if (name === "productTags") {
+      setProductTags(value);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const value = productTags.trim();
+
+      if (tags.includes(value)) return;
+
+      setTags([...tags, value]);
+      setProductTags("");
+    }
+  };
+
+  const handleTagDelete = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
+  };
+
+  useEffect(() => {
+    if (productName && productInfo && productPrice) {
+      setIsButtonActive(true);
+    } else {
+      setIsButtonActive(false);
+    }
+  }, [productName, productInfo, productPrice]);
+
   return (
     <div>
       <Header />
-      <Container>
+      <FormContainer>
         <AddItemHeader>
           <h1>상품 등록하기</h1>
-          <Button>등록</Button>
+          <Button type="submit" disabled={!isButtonActive}>
+            등록
+          </Button>
         </AddItemHeader>
         <FormField title="상품 이미지">
           <FileInput />
         </FormField>
         <FormField title="상품명">
-          <Input placeholder="상품명을 입력해주세요" />
+          <Input
+            type="text"
+            name="productName"
+            value={productName}
+            onChange={handleChange}
+            placeholder="상품명을 입력해주세요"
+          />
         </FormField>
         <FormField title="상품 소개">
-          <Textarea placeholder="상품 소개를 입력해주세요" />
+          <Textarea
+            type="text"
+            name="productInfo"
+            value={productInfo}
+            onChange={handleChange}
+            placeholder="상품 소개를 입력해주세요"
+          />
         </FormField>
         <FormField title="판매가격">
-          <Input placeholder="판매가격을 입력해주세요" />
+          <Input
+            type="number"
+            name="productPrice"
+            value={productPrice}
+            onChange={handleChange}
+            placeholder="판매가격을 입력해주세요"
+          />
         </FormField>
         <FormField title="태그">
-          <Input placeholder="태그를 입력해주세요" />
+          <Input
+            value={productTags}
+            name="productTags"
+            placeholder="태그를 입력해주세요"
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+          />
+          <Tag tags={tags} onDelete={handleTagDelete} />
         </FormField>
-      </Container>
+      </FormContainer>
     </div>
   );
 }
