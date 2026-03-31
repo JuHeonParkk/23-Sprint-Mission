@@ -63,17 +63,36 @@ const DeleteButton = styled.button`
   right: 12px;
 `;
 
+const ErrorMsg = styled.p`
+  font-size: 16px;
+  color: var(--error);
+`;
+
 export default function FileInput() {
   const [file, setFile] = useState();
   const [preview, setPreview] = useState(null);
+  const [error, setError] = useState("");
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
     const nextFile = e.target.files[0]; // 파일이 선택되지 않은 경우
-    setFile(nextFile);
+
+    if (file) {
+      setError("*이미지 등록은 최대 1개까지 가능합니다.");
+      return;
+    }
+
+    if (nextFile) {
+      setFile(nextFile);
+      setError("");
+    }
   };
 
   const handleClick = () => {
+    if (file) {
+      setError("*이미지 등록은 최대 1개까지 가능합니다.");
+      return;
+    }
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -81,6 +100,7 @@ export default function FileInput() {
 
   const handleDelete = () => {
     setFile(null);
+    setError("");
     if (inputRef.current) {
       inputRef.current.value = "";
     }
@@ -89,6 +109,7 @@ export default function FileInput() {
   useEffect(() => {
     if (!file) {
       setPreview(null);
+      setError("");
       return;
     }
     const objectUrl = URL.createObjectURL(file);
@@ -97,20 +118,23 @@ export default function FileInput() {
   }, [file]);
 
   return (
-    <Container>
-      <FileInputContainer onClick={handleClick}>
-        <img src={plusIcon} alt="이미지 등록 아이콘" />
-        <p>이미지 등록</p>
-      </FileInputContainer>
-      <input type="file" ref={inputRef} onChange={handleChange} hidden />
-      {preview && (
-        <PreviewContainer>
-          <img src={preview} alt="상품 이미지" />
-          <DeleteButton type="button" onClick={handleDelete}>
-            <img src={closeIcon} alt="삭제" />
-          </DeleteButton>
-        </PreviewContainer>
-      )}
-    </Container>
+    <>
+      <Container>
+        <FileInputContainer onClick={handleClick}>
+          <img src={plusIcon} alt="이미지 등록 아이콘" />
+          <p>이미지 등록</p>
+        </FileInputContainer>
+        <input type="file" ref={inputRef} onChange={handleChange} hidden />
+        {preview && (
+          <PreviewContainer>
+            <img src={preview} alt="상품 이미지" />
+            <DeleteButton type="button" onClick={handleDelete}>
+              <img src={closeIcon} alt="삭제" />
+            </DeleteButton>
+          </PreviewContainer>
+        )}
+      </Container>
+      {error && <ErrorMsg>{error}</ErrorMsg>}
+    </>
   );
 }

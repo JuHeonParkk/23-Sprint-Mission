@@ -34,6 +34,28 @@ const AddItemHeader = styled.div`
   }
 `;
 
+const Textarea = styled.textarea`
+  width: 100%;
+  height: 282px;
+  padding: 15px 24px;
+  background-color: var(--secondary-100);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--secondary-800);
+  font-family: inherit;
+
+  &:focus,
+  &:active {
+    outline: 1px solid var(--primary-100);
+  }
+
+  &::placeholder {
+    font-size: 16px;
+    color: var(--secondary-400);
+  }
+`;
+
 export default function AddItemPage() {
   return (
     <div>
@@ -50,7 +72,7 @@ export default function AddItemPage() {
           <Input placeholder="상품명을 입력해주세요" />
         </FormField>
         <FormField title="상품 소개">
-          <textarea placeholder="상품 소개를 입력해주세요" />
+          <Textarea placeholder="상품 소개를 입력해주세요" />
         </FormField>
         <FormField title="판매가격">
           <Input placeholder="판매가격을 입력해주세요" />
