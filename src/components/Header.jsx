@@ -118,9 +118,12 @@ export default function Header() {
           <li>
             <NavLink
               to="/items"
-              style={({ isActive }) => ({
-                color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
-              })}
+              style={({ isActive }) => {
+                const active = isActive || location.pathname === "/additem";
+                return {
+                  color: active ? "var(--primary-100)" : "var(--secondary-600)",
+                };
+              }}
             >
               중고마켓
             </NavLink>
