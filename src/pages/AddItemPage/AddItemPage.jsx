@@ -66,24 +66,15 @@ export default function AddItemPage() {
   const [productTags, setProductTags] = useState("");
   const [isButtonActive, setIsButtonActive] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "productName") {
-      setProductName(value);
-    } else if (name === "productInfo") {
-      setProductInfo(value);
-    } else if (name === "productPrice") {
-      setProductPrice(value);
-    } else if (name === "productTags") {
-      setProductTags(value);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isButtonActive) return;
+    console.log("폼제출");
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
       const value = productTags.trim();
 
       if (tags.includes(value)) return;
@@ -98,20 +89,24 @@ export default function AddItemPage() {
   };
 
   useEffect(() => {
-    if (productName && productInfo && productPrice) {
+    if (productName && productInfo && productPrice && tags.length > 0) {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);
     }
-  }, [productName, productInfo, productPrice]);
+  }, [productName, productInfo, productPrice, tags]);
 
   return (
     <div>
       <Header />
-      <FormContainer>
+      <FormContainer onSubmit={handleSubmit}>
         <AddItemHeader>
           <h1>상품 등록하기</h1>
-          <Button type="submit" disabled={!isButtonActive}>
+          <Button
+            type="submit"
+            disabled={!isButtonActive}
+            onClick={handleSubmit}
+          >
             등록
           </Button>
         </AddItemHeader>
@@ -123,7 +118,7 @@ export default function AddItemPage() {
             type="text"
             name="productName"
             value={productName}
-            onChange={handleChange}
+            onChange={(e) => setProductName(e.target.value)}
             placeholder="상품명을 입력해주세요"
           />
         </FormField>
@@ -132,7 +127,7 @@ export default function AddItemPage() {
             type="text"
             name="productInfo"
             value={productInfo}
-            onChange={handleChange}
+            onChange={(e) => setProductInfo(e.target.value)}
             placeholder="상품 소개를 입력해주세요"
           />
         </FormField>
@@ -141,7 +136,7 @@ export default function AddItemPage() {
             type="number"
             name="productPrice"
             value={productPrice}
-            onChange={handleChange}
+            onChange={(e) => setProductPrice(e.target.value)}
             placeholder="판매가격을 입력해주세요"
           />
         </FormField>
@@ -150,7 +145,7 @@ export default function AddItemPage() {
             value={productTags}
             name="productTags"
             placeholder="태그를 입력해주세요"
-            onChange={handleChange}
+            onChange={(e) => setProductTags(e.target.value)}
             onKeyDown={handleKeyDown}
           />
           <Tag tags={tags} onDelete={handleTagDelete} />
