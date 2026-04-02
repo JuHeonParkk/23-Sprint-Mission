@@ -10,6 +10,7 @@ const Input = styled.input`
   font-size: 16px;
   color: var(--secondary-800);
   ${({ show }) => (show ? "outline: 1px solid var(--error);" : "")}
+  font-family: inherit;
 
   &:focus,
   &:active {
@@ -18,7 +19,6 @@ const Input = styled.input`
 
   &::placeholder {
     font-size: 16px;
-    font-weight: 500;
     color: var(--secondary-400);
   }
 `;

@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import logoFace from "../assets/common/logo_face.svg";
-import logoText from "../assets/common/logo_text.svg";
-import profile from "../assets/common/profile.svg";
+import logoFace from "@/assets/common/logo_face.svg";
+import logoText from "@/assets/common/logo_text.svg";
+import profile from "@/assets/common/profile.svg";
 import Button from "./Button";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
@@ -93,13 +92,8 @@ const ProfileButton = styled(Button)`
 export default function Header() {
   const isLogin = false;
   const location = useLocation();
-  const showNav = location.pathname === "/items";
-
-  function getStyle({ isActive }) {
-    return {
-      color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
-    };
-  }
+  const showNav =
+    location.pathname === "/items" || location.pathname === "/additem";
 
   return (
     <HeaderContainer>
@@ -112,12 +106,25 @@ export default function Header() {
       {showNav && (
         <LinkNav>
           <li>
-            <NavLink to="/" style={getStyle}>
+            <NavLink
+              to="/"
+              style={({ isActive }) => ({
+                color: isActive ? "var(--primary-100)" : "var(--secondary-600)",
+              })}
+            >
               자유게시판
             </NavLink>
           </li>
           <li>
-            <NavLink to="/items" style={getStyle}>
+            <NavLink
+              to="/items"
+              style={({ isActive }) => {
+                const active = isActive || location.pathname === "/additem";
+                return {
+                  color: active ? "var(--primary-100)" : "var(--secondary-600)",
+                };
+              }}
+            >
               중고마켓
             </NavLink>
           </li>

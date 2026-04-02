@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import AllProductSection from "../components/AllProductSection";
-import BestProductSection from "../components/BestProductSection";
-import axios from "../api/index.js";
-import useDevice from "../hook/useDevice";
+import Header from "@/components/Header";
+import AllProductSection from "./components/AllProductSection";
+import BestProductSection from "./components/BestProductSection";
+import axios from "@/api/index";
+import useDevice from "@/hooks/useDevice";
 
 export default function ProductsPage() {
   const [bestProducts, setBestProducts] = useState([]);

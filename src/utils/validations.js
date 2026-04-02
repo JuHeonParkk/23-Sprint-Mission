@@ -1,4 +1,4 @@
-export default function useValidation() {
+export default function validations() {
   const emailRegex = /^\S+@\S+\.\S+$/;
 
   const validateEmail = (email) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import useDevice from "../hook/useDevice";
+import useDevice from "@/hooks/useDevice";
 import ProductCard from "./ProductCard";
 
 const Container = styled.div`
@@ -38,17 +38,15 @@ const ProductGrid = styled.div`
   }
 `;
 
+const DEVICE_PRODUCT_COUNT = {
+  mobile: 1,
+  tablet: 2,
+  desktop: 4,
+};
+
 export default function BestProductSection({ products }) {
-  let count;
   const device = useDevice();
-
-  if (device === "mobile") count = 1;
-  else if (device === "tablet") count = 2;
-  else count = 4;
-
-  // const bestProducts = [...products]
-  //   .sort((a, b) => b.favoriteCount - a.favoriteCount)
-  //   .slice(0, count);
+  const count = DEVICE_PRODUCT_COUNT[device] ?? 4;
 
   return (
     <Container>

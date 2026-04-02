@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import passwordHiddenIcon from "../assets/icon/password_hidden_icon.svg";
-import passwordVisibleIcon from "../assets/icon/password_visible_icon.svg";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import SocialLogin from "../components/SocialLogin";
-import useValidation from "../hook/useValidation";
-import LogoHeader from "../components/LogoHeader";
+
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import SocialLogin from "./components/SocialLogin";
+import validations from "@/utils/validations";
+import LogoHeader from "./components/LogoHeader";
+
+import passwordHiddenIcon from "@/assets/icon/password_hidden_icon.svg";
+import passwordVisibleIcon from "@/assets/icon/password_visible_icon.svg";
 
 const Container = styled.div`
   width: 100%;
@@ -94,7 +96,7 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { emailRegex, validateEmail, validatePassword } = useValidation();
+  const { emailRegex, validateEmail, validatePassword } = validations();
 
   const handleSubmit = (e) => {
     e.preventDefault();

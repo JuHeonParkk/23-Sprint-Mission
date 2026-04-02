@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import like from "../assets/like_default.svg";
-import placeholderImage from "../assets/placeholderImage.svg";
+import like from "@/assets/icon/like.svg";
+import placeholderImage from "@/assets/placeholderImage.svg";
 
 const Container = styled.div`
   display: flex;
@@ -50,9 +50,9 @@ const LikeCount = styled.span`
   color: var(--secondary-600);
 `;
 
-export default function ProductCard({ product }) {
-  const { images, name, price, favoriteCount } = product;
-
+export default function ProductCard({
+  product: { images, name, price, favoriteCount },
+}) {
   return (
     <Container>
       <ProductImg

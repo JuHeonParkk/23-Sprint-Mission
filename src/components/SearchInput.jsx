@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Input from "./Input";
-import searchIcon from "../assets/searchIcon.svg";
+import searchIcon from "../assets/icon/searchIcon.svg";
 
 const Container = styled.div`
   position: relative;
