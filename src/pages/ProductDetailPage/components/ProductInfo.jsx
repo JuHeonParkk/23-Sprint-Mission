@@ -10,7 +10,7 @@ export default function ProductInfo({ productId, productDetail }) {
       <div>
         <p>{productDetail.name}</p>
         <p>{productDetail.price}</p>
-        <div>{productDetail.price}</div>
+        <div></div>
         <div>
           <p>상품 소개</p>
           <p>{productDetail.description}</p>
@@ -19,7 +19,7 @@ export default function ProductInfo({ productId, productDetail }) {
           <p>상품 태그</p>
           <div>
             {productDetail.tags.map((tag) => (
-              <div>
+              <div key={tag}>
                 <span>#{tag}</span>
               </div>
             ))}
@@ -29,7 +29,7 @@ export default function ProductInfo({ productId, productDetail }) {
           <img />
           <div>
             <p>{productDetail.ownerNickname}</p>
-            <p>{productDetail.createdAt.toISOString}</p>
+            <p>{productDetail.createdAt}</p>
           </div>
           <button>
             <img src={productDetail.isFavorite ? LikeIcon : DefaultLikeIcon} />

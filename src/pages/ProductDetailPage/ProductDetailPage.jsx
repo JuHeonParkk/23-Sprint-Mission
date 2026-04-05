@@ -5,8 +5,9 @@ import ProductInfo from "./components/ProductInfo";
 import axios from "@/api/index.js";
 
 export default function ProductDetailPage() {
-  const [productDetail, setProductDetail] = useState({});
+  const [productDetail, setProductDetail] = useState({ images: [], tags: [] });
   const { id: productId } = useParams();
+
   useEffect(() => {
     const handleProductLoad = async () => {
       try {
