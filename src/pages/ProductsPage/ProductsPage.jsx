@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AllProductSection from "./components/AllProductSection";
 import BestProductSection from "./components/BestProductSection";
