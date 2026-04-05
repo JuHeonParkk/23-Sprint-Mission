@@ -69,7 +69,6 @@ export default function AddItemPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isButtonActive) return;
-    console.log("폼제출");
   };
 
   const handleKeyDown = (e) => {
