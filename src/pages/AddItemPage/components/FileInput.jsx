@@ -79,22 +79,13 @@ export default function FileInput() {
 
     if (file) {
       setError("*이미지 등록은 최대 1개까지 가능합니다.");
+      e.target.value = ""; // 파일 선택 초기화
       return;
     }
 
     if (nextFile) {
       setFile(nextFile);
       setError("");
-    }
-  };
-
-  const handleClick = () => {
-    if (file) {
-      setError("*이미지 등록은 최대 1개까지 가능합니다.");
-      return;
-    }
-    if (inputRef.current) {
-      inputRef.current.click();
     }
   };
 
@@ -120,11 +111,20 @@ export default function FileInput() {
   return (
     <>
       <Container>
-        <FileInputContainer onClick={handleClick}>
-          <img src={plusIcon} alt="이미지 등록 아이콘" />
-          <p>이미지 등록</p>
-        </FileInputContainer>
-        <input type="file" ref={inputRef} onChange={handleChange} hidden />
+        <input
+          type="file"
+          id="file"
+          ref={inputRef}
+          onChange={handleChange}
+          hidden
+        />
+        <label htmlFor="file">
+          <FileInputContainer>
+            <img src={plusIcon} alt="이미지 등록 아이콘" />
+            <p>이미지 등록</p>
+          </FileInputContainer>
+        </label>
+
         {preview && (
           <PreviewContainer>
             <img src={preview} alt="상품 이미지" />
