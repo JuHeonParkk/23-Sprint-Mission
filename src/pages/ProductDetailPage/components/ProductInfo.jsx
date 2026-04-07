@@ -48,8 +48,8 @@ const ProductInfoContainer = styled.div`
 `;
 
 const Line = styled.div`
-  ${({ isVertical }) =>
-    isVertical ? `width: 1px; height: 100%;` : `width: 100%; height: 1px;`}
+  ${({ $isVertical }) =>
+    $isVertical ? `width: 1px; height: 100%;` : `width: 100%; height: 1px;`}
   background-color: var(--secondary-200);
 `;
 
@@ -219,7 +219,7 @@ export default function ProductInfo({ productDetail }) {
               {new Date(productDetail.createdAt).toLocaleDateString()}
             </ProductCreatedAt>
           </OwnerInfo>
-          <Line isVertical />
+          <Line $isVertical />
           <LikeButton>
             <img src={productDetail.isFavorite ? LikeIcon : DefaultLikeIcon} />
             <span>{productDetail.favoriteCount}</span>
