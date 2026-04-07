@@ -15,10 +15,22 @@ const Container = styled.div`
   }
 `;
 
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: var(--secondary-200);
+  margin: 24px 0;
+
+  @media (min-width: 768px) {
+    margin: 40px 0;
+  }
+`;
+
 export default function ProductDetail({ productDetail }) {
   return (
     <Container>
       <ProductInfo productDetail={productDetail} />
+      <Line />
       <ReviewInput />
     </Container>
   );

@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
-const Input = styled.input`
+const Input = css`
   width: 100%;
   height: 56px;
-  padding: 15px 24px;
+  padding: 16px 24px;
   background-color: var(--secondary-100);
   border: none;
   border-radius: 12px;
@@ -19,6 +19,7 @@ const Input = styled.input`
 
   &::placeholder {
     font-size: 16px;
+    line-height: 26px;
     color: var(--secondary-400);
   }
 `;
