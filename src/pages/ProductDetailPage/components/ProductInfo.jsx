@@ -11,17 +11,14 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 16px;
 
   @media (min-width: 768px) {
     flex-direction: row;
     gap: 16px;
-    padding: 24px;
   }
 
   @media (min-width: 1200px) {
     gap: 24px;
-    padding: 24px 200px;
   }
 `;
 
@@ -190,7 +187,7 @@ const LikeButton = styled.button`
   color: var(--secondary-500);
 `;
 
-export default function ProductInfo({ productId, productDetail }) {
+export default function ProductInfo({ productDetail }) {
   return (
     <Container>
       <ProductImageContainer images={productDetail.images} />

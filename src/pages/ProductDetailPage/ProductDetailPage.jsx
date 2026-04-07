@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
-import ProductInfo from "./components/ProductInfo";
+import ProductDetail from "./components/ProductDetail";
 import axios from "@/api/index.js";
 
 export default function ProductDetailPage() {
@@ -24,7 +24,7 @@ export default function ProductDetailPage() {
   return (
     <div>
       <Header />
-      <ProductInfo productId={productId} productDetail={productDetail} />
+      <ProductDetail productDetail={productDetail} />
     </div>
   );
 }
