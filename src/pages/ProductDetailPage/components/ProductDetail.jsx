@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ProductInfo from "./ProductInfo";
 import ReviewInput from "./ReviewInput";
+import ProductReview from "./ProductReview";
 
 const Container = styled.div`
   width: 100%;
@@ -26,12 +27,13 @@ const Line = styled.div`
   }
 `;
 
-export default function ProductDetail({ productDetail }) {
+export default function ProductDetail({ productDetail, reviews }) {
   return (
     <Container>
       <ProductInfo productDetail={productDetail} />
       <Line />
       <ReviewInput />
+      {reviews && <ProductReview reviews={reviews} />}
     </Container>
   );
 }

@@ -6,25 +6,45 @@ import axios from "@/api/index.js";
 
 export default function ProductDetailPage() {
   const [productDetail, setProductDetail] = useState({ images: [], tags: [] });
+  const [reviews, setReviews] = useState([]);
   const { id: productId } = useParams();
 
   useEffect(() => {
     const handleProductLoad = async () => {
       try {
         const response = await axios.get(`/products/${productId}`);
-        console.log(response.data);
         setProductDetail(response.data);
       } catch (error) {
         console.error(error);
       }
     };
+
+    const handleReviewLoad = async () => {
+      try {
+        const response = await axios.get(`/products/${productId}/comments`, {
+          params: {
+            productId,
+            limit: 3,
+            cursor: 0,
+          },
+        });
+        const { list } = response.data;
+        if (!list) return;
+
+        console.log(list);
+        setReviews(list);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     handleProductLoad();
+    handleReviewLoad();
   }, [productId]);
 
   return (
     <div>
       <Header />
-      <ProductDetail productDetail={productDetail} />
+      <ProductDetail productDetail={productDetail} reviews={reviews} />
     </div>
   );
 }

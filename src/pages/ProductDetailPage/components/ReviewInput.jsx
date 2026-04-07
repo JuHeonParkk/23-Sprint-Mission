@@ -1,13 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Input from "@/components/Input";
-import Button from "../../../components/Button";
+import Button from "@/components/Button";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 40px;
 
   & label {
     font-size: 16px;
@@ -15,10 +16,13 @@ const Container = styled.div`
     color: var(--secondary-900);
     margin-bottom: -8px;
   }
+
+  @media (min-width: 1200px) {
+    margin-bottom: 24px;
+  }
 `;
 
 const Textarea = styled.textarea`
-  ${Input}
   height: 129px;
   resize: none;
   font-size: 14px;
