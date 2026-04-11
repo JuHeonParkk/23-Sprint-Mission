@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import Button from "@/components/Button";
 import ProductInfo from "./ProductInfo";
 import ReviewInput from "./ReviewInput";
 import ProductReview from "./ProductReview";
+
+import ArrowBackIcon from "@/assets/icon/arrow_back.svg";
 
 const Container = styled.div`
   width: 100%;
@@ -27,13 +30,35 @@ const Line = styled.div`
   }
 `;
 
+const ReviewContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+`;
+
+const BackButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 40px;
+  padding: 11px 40px;
+`;
+
 export default function ProductDetail({ productDetail, reviews }) {
   return (
     <Container>
       <ProductInfo productDetail={productDetail} />
       <Line />
       <ReviewInput />
-      {reviews && <ProductReview reviews={reviews} />}
+      <ReviewContainer>
+        {reviews && <ProductReview reviews={reviews} />}
+        <BackButton>
+          <p>목록으로 돌아가기</p>
+          <img src={ArrowBackIcon} />
+        </BackButton>
+      </ReviewContainer>
     </Container>
   );
 }

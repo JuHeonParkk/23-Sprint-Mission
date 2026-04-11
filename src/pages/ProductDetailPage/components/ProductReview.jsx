@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import KebabIcon from "@/assets/icon/kebab_icon.svg";
 import Profile from "@/assets/common/profile.svg";
+import EmptyReviewImg from "@/assets/common/inquiry_empty.svg";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 12px 0;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
 `;
 
 const ReviewContainer = styled.div`
@@ -63,7 +66,41 @@ const Line = styled.div`
   margin: 12px 0 24px 0;
 `;
 
+const EmptyContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
+
+const EmptyImg = styled.img`
+  width: 140px;
+  height: 140px;
+
+  @media (min-width: 1200px) {
+    width: 196px;
+    height: 196px;
+  }
+`;
+
+const EmptyText = styled.p`
+  font-size: 16px;
+  color: var(--secondary-400);
+  text-align: center;
+`;
+
 export default function ProductReview({ reviews }) {
+  if (!reviews || reviews.length === 0) {
+    return (
+      <EmptyContainer>
+        <EmptyImg src={EmptyReviewImg} alt="리뷰가 없습니다" />
+        <EmptyText>아직 문의가 없어요</EmptyText>
+      </EmptyContainer>
+    );
+  }
+
   return (
     <>
       {reviews.map((review) => (
