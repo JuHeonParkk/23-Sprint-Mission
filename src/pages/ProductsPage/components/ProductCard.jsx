@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import like from "@/assets/icon/like.svg";
-import placeholderImage from "@/assets/placeholderImage.svg";
+import placeholderImage from "@/assets/common/placeholderImage.svg";
 
 const Container = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.input`
+export const InputStyle = styled.input`
   width: 100%;
   height: 56px;
   padding: 16px 24px;
@@ -24,4 +24,6 @@ const Input = styled.input`
   }
 `;
 
-export default Input;
+export default function Input({ className = "", ...rest }) {
+  return <InputStyle className={className} {...rest} />;
+}

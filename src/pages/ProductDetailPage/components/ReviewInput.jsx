@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Input from "@/components/Input";
 import Button from "@/components/Button";
+import { InputStyle } from "@/components/Input";
 
 const Container = styled.div`
   width: 100%;
@@ -22,7 +22,7 @@ const Container = styled.div`
   }
 `;
 
-const Textarea = styled.textarea`
+const StyledTextarea = styled(InputStyle).attrs({ as: "textarea" })`
   height: 129px;
   resize: none;
   font-size: 14px;
@@ -52,7 +52,8 @@ export default function ReviewInput() {
   return (
     <Container>
       <label htmlFor="review">문의하기</label>
-      <Textarea
+      <StyledTextarea
+        rows={4}
         id="review"
         type="text"
         placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
