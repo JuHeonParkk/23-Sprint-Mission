@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import ProductInfo from "./ProductInfo";
 import ReviewInput from "./ReviewInput";
@@ -47,6 +48,8 @@ const BackButton = styled(Button)`
 `;
 
 export default function ProductDetail({ productDetail, reviews }) {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <ProductInfo productDetail={productDetail} />
@@ -54,7 +57,7 @@ export default function ProductDetail({ productDetail, reviews }) {
       <ReviewInput />
       <ReviewContainer>
         {reviews && <ProductReview reviews={reviews} />}
-        <BackButton onClick={() => window.history.back()}>
+        <BackButton onClick={() => navigate("/items")}>
           <p>목록으로 돌아가기</p>
           <img src={ArrowBackIcon} />
         </BackButton>
