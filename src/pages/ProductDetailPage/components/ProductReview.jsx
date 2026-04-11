@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 import KebabIcon from "@/assets/icon/kebab_icon.svg";
 import Profile from "@/assets/common/profile.svg";
 import EmptyReviewImg from "@/assets/common/inquiry_empty.svg";
+import KebabButton from "@/components/KebabButton";
 
 const Container = styled.div`
   width: 100%;
@@ -14,6 +16,7 @@ const Container = styled.div`
 
 const ReviewContainer = styled.div`
   width: 100%;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,6 +27,10 @@ const ReviewContainer = styled.div`
     font-weight: 400;
     color: var(--secondary-800);
   }
+`;
+
+const KebabImage = styled.img`
+  cursor: pointer;
 `;
 
 const ReviewerContainer = styled.div`
@@ -91,6 +98,12 @@ const EmptyText = styled.p`
 `;
 
 export default function ProductReview({ reviews }) {
+  const [kebabOpen, setKebabOpen] = useState(null);
+
+  const handleKebabToggle = (reviewId) => {
+    setKebabOpen((prev) => (prev === reviewId ? null : reviewId));
+  };
+
   if (!reviews || reviews.length === 0) {
     return (
       <EmptyContainer>
@@ -103,10 +116,14 @@ export default function ProductReview({ reviews }) {
   return (
     <>
       {reviews.map((review) => (
-        <Container>
-          <ReviewContainer key={review.id}>
+        <Container key={review.id}>
+          <ReviewContainer>
             <p>{review.content}</p>
-            <img src={KebabIcon} />
+            <KebabImage
+              src={KebabIcon}
+              onClick={() => handleKebabToggle(review.id)}
+            />
+            {kebabOpen === review.id && <KebabButton />}
           </ReviewContainer>
 
           <ReviewerContainer>
