@@ -56,7 +56,10 @@ export default function ProductDetail({ productDetail, reviews }) {
       <Line />
       <ReviewInput />
       <ReviewContainer>
-        {reviews && <ProductReview reviews={reviews} />}
+        {reviews &&
+          reviews.map((review) => (
+            <ProductReview key={review.id} review={review} />
+          ))}
         <BackButton onClick={() => navigate("/items")}>
           <p>목록으로 돌아가기</p>
           <img src={ArrowBackIcon} />

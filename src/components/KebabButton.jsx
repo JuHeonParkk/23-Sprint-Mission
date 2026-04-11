@@ -32,11 +32,6 @@ const KebabContainer = styled.ul`
   }
 `;
 
-export default function KebabButton() {
-  return (
-    <KebabContainer>
-      <li>수정하기</li>
-      <li>삭제하기</li>
-    </KebabContainer>
-  );
+export default function KebabButton({ children }) {
+  return <KebabContainer>{children}</KebabContainer>;
 }
