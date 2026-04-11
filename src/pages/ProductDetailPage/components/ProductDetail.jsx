@@ -54,7 +54,7 @@ export default function ProductDetail({ productDetail, reviews }) {
       <ReviewInput />
       <ReviewContainer>
         {reviews && <ProductReview reviews={reviews} />}
-        <BackButton>
+        <BackButton onClick={() => window.history.back()}>
           <p>목록으로 돌아가기</p>
           <img src={ArrowBackIcon} />
         </BackButton>
