@@ -23,21 +23,21 @@ export default function MainPage() {
         subTitle={"Hot Item"}
         title={"인기 상품을\n 확인해 보세요"}
         info={"가장 HOT한 중고거래 물품을\n 판다 마켓에서 확인해 보세요"}
-        alignReverse={false}
+        $alignReverse={false}
       />
       <FeatureSection
         imgUrl={FeatureImage2}
         subTitle={"Search"}
         title={"구매를 원하는\n 상품을 검색하세요"}
         info={"구매하고 싶은 물품을 검색해서\n 쉽게 찾아보세요"}
-        alignReverse={true}
+        $alignReverse={true}
       />
       <FeatureSection
         imgUrl={FeatureImage3}
         subTitle={"Register"}
         title={"판매를 원하는\n 상품을 등록하세요"}
         info={"어떤 물건이든 판매하고 싶은\n 상품을 쉽게 등록하세요"}
-        alignReverse={false}
+        $alignReverse={false}
       />
       <HeroSection
         heroTitle={"믿을 수 있는\n 판다마켓 중고 거래"}

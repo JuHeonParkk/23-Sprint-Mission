@@ -28,8 +28,8 @@ const ContentInner = styled.div`
 
   @media (min-width: 1200px) {
     max-width: 1200px;
-    flex-direction: ${({ alignReverse }) =>
-      alignReverse ? "row-reverse" : "row"};
+    flex-direction: ${({ $alignReverse }) =>
+      $alignReverse ? "row-reverse" : "row"};
     align-items: center;
     margin: 0 auto;
     margin-bottom: 138px;
@@ -47,9 +47,9 @@ const FeatureText = styled.div`
   flex-grow: 1;
   color: var(--secondary-700);
 
-  align-items: ${({ alignReverse }) =>
-    alignReverse ? "flex-end" : "flex-start"};
-  text-align: ${({ alignReverse }) => (alignReverse ? "right" : "left")};
+  align-items: ${({ $alignReverse }) =>
+    $alignReverse ? "flex-end" : "flex-start"};
+  text-align: ${({ $alignReverse }) => ($alignReverse ? "right" : "left")};
 `;
 
 const SubTitle = styled.span`
@@ -102,9 +102,9 @@ export default function FeatureSection({
 }) {
   return (
     <Container>
-      <ContentInner alignReverse={alignReverse}>
+      <ContentInner $alignReverse={alignReverse}>
         <Img src={imgUrl} alt="Feature" />
-        <FeatureText alignReverse={alignReverse}>
+        <FeatureText $alignReverse={alignReverse}>
           <SubTitle>{subTitle}</SubTitle>
           <Title>{title}</Title>
           <Info>{info}</Info>

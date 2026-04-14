@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import ProductDetail from "./components/ProductDetail";
-import { getProduct } from "@/api/product";
+import { getProductById } from "@/api/product";
+import { getReview } from "@/api/comment";
 
 export default function ProductDetailPage() {
   const [productDetail, setProductDetail] = useState({ images: [], tags: [] });
@@ -12,7 +13,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const handleProductLoad = async () => {
       try {
-        const data = await getProduct(productId);
+        const data = await getProductById(productId);
         setProductDetail(data);
       } catch (error) {
         console.error(error);
@@ -21,14 +22,8 @@ export default function ProductDetailPage() {
 
     const handleReviewLoad = async () => {
       try {
-        const response = await axios.get(`/products/${productId}/comments`, {
-          params: {
-            productId,
-            limit: 3,
-            cursor: 0,
-          },
-        });
-        const { list } = response.data;
+        const data = await getReview(productId);
+        const { list } = data;
         if (!list) return;
         setReviews(list);
       } catch (error) {
