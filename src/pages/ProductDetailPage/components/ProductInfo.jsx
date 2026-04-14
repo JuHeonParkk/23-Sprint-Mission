@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { addLikeProduct, deleteLikeProduct } from "@/api/product";
+
 import LikeIcon from "@/assets/icon/like.svg";
 import DefaultLikeIcon from "@/assets/icon/like_default.svg";
 import KebabIcon from "@/assets/icon/kebab_icon.svg";
@@ -187,26 +190,62 @@ const LikeButton = styled.button`
   color: var(--secondary-500);
 `;
 
-export default function ProductInfo({ productDetail }) {
+export default function ProductInfo({
+  productDetail: {
+    isFavorite,
+    images,
+    name,
+    price,
+    description,
+    tags,
+    ownerNickname,
+    createdAt,
+    favoriteCount,
+    id,
+  },
+}) {
+  const [isLiked, setIsLiked] = useState(isFavorite);
+  const [likeCount, setLikeCount] = useState(favoriteCount);
+
+  // 좋아요 핸들러
+  const handleLikeToggle = async (productId) => {
+    try {
+      if (isLiked) {
+        await deleteLikeProduct(productId);
+      } else {
+        await addLikeProduct(productId);
+      }
+      setIsLiked((prev) => !prev);
+      setLikeCount((count) => (isLiked ? count - 1 : count + 1));
+    } catch (error) {
+      console.error("좋아요 처리 중 오류 발생:", error);
+    }
+  };
+
+  useEffect(() => {
+    setIsLiked(isFavorite);
+    setLikeCount(favoriteCount);
+  }, [isFavorite, favoriteCount]);
+
   return (
     <Container>
-      <ProductImageContainer images={productDetail.images} />
+      <ProductImageContainer images={images} />
       <ProductInfoContainer>
         <ProductNameContainer>
-          <ProductName>{productDetail.name}</ProductName>
+          <ProductName>{name}</ProductName>
           <img src={KebabIcon} />
         </ProductNameContainer>
 
-        <ProductPrice>{productDetail.price}원</ProductPrice>
+        <ProductPrice>{price?.toLocaleString()}원</ProductPrice>
         <Line />
         <ProductDescriptionContainer>
           <Title>상품 소개</Title>
-          <p>{productDetail.description}</p>
+          <p>{description}</p>
         </ProductDescriptionContainer>
         <div>
           <Title>상품 태그</Title>
           <TagContainer>
-            {productDetail.tags.map((tag) => (
+            {tags.map((tag) => (
               <Tag key={tag}>#{tag}</Tag>
             ))}
           </TagContainer>
@@ -214,15 +253,15 @@ export default function ProductInfo({ productDetail }) {
         <OwnerInfoContainer>
           <img src={Profile} alt="사용자 프로필" />
           <OwnerInfo>
-            <OwnerName>{productDetail.ownerNickname}</OwnerName>
+            <OwnerName>{ownerNickname}</OwnerName>
             <ProductCreatedAt>
-              {new Date(productDetail.createdAt).toLocaleDateString()}
+              {new Date(createdAt).toLocaleDateString()}
             </ProductCreatedAt>
           </OwnerInfo>
           <Line $isVertical />
-          <LikeButton>
-            <img src={productDetail.isFavorite ? LikeIcon : DefaultLikeIcon} />
-            <span>{productDetail.favoriteCount}</span>
+          <LikeButton onClick={() => handleLikeToggle(id)}>
+            <img src={isLiked ? LikeIcon : DefaultLikeIcon} />
+            <span>{likeCount}</span>
           </LikeButton>
         </OwnerInfoContainer>
       </ProductInfoContainer>
