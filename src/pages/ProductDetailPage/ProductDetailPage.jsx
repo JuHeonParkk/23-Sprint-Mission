@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import ProductDetail from "./components/ProductDetail";
-import axios from "@/api/index.js";
+import { getProduct } from "@/api/product";
 
 export default function ProductDetailPage() {
   const [productDetail, setProductDetail] = useState({ images: [], tags: [] });
@@ -12,8 +12,8 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const handleProductLoad = async () => {
       try {
-        const response = await axios.get(`/products/${productId}`);
-        setProductDetail(response.data);
+        const data = await getProduct(productId);
+        setProductDetail(data);
       } catch (error) {
         console.error(error);
       }
