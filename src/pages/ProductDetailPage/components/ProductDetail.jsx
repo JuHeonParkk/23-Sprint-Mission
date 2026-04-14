@@ -6,6 +6,7 @@ import ReviewInput from "./ReviewInput";
 import ProductReview from "./ProductReview";
 
 import ArrowBackIcon from "@/assets/icon/arrow_back.svg";
+import EmptyReviewImg from "@/assets/common/inquiry_empty.svg";
 
 const Container = styled.div`
   width: 100%;
@@ -47,19 +48,72 @@ const BackButton = styled(Button)`
   padding: 11px 40px;
 `;
 
-export default function ProductDetail({ productDetail, reviews }) {
+const EmptyContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
+
+const EmptyImg = styled.img`
+  width: 140px;
+  height: 140px;
+
+  @media (min-width: 1200px) {
+    width: 196px;
+    height: 196px;
+  }
+`;
+
+const EmptyText = styled.p`
+  font-size: 16px;
+  color: var(--secondary-400);
+  text-align: center;
+`;
+
+export default function ProductDetail({ productDetail, reviews, setReviews }) {
   const navigate = useNavigate();
+
+  const handleReviewSubmit = (newReview) => {
+    const review = {
+      id: Date.now(),
+      content: newReview,
+      updatedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+    };
+    setReviews((prevReviews) => [review, ...prevReviews]);
+  };
+
+  const handleReviewUpdate = (id, editReview) => {
+    setReviews((prevReviews) =>
+      prevReviews.map((review) =>
+        review.id === id ? { ...review, content: editReview } : review,
+      ),
+    );
+  };
 
   return (
     <Container>
       <ProductInfo productDetail={productDetail} />
       <Line />
-      <ReviewInput />
+      <ReviewInput onSubmit={handleReviewSubmit} />
       <ReviewContainer>
-        {reviews &&
+        {reviews.length === 0 ? (
+          <EmptyContainer>
+            <EmptyImg src={EmptyReviewImg} alt="리뷰가 없습니다" />
+            <EmptyText>아직 문의가 없어요</EmptyText>
+          </EmptyContainer>
+        ) : (
           reviews.map((review) => (
-            <ProductReview key={review.id} review={review} />
-          ))}
+            <ProductReview
+              key={review.id}
+              review={review}
+              onUpdate={handleReviewUpdate}
+            />
+          ))
+        )}
         <BackButton onClick={() => navigate("/items")}>
           <p>목록으로 돌아가기</p>
           <img src={ArrowBackIcon} />

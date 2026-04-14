@@ -30,8 +30,6 @@ export default function ProductDetailPage() {
         });
         const { list } = response.data;
         if (!list) return;
-
-        console.log(list);
         setReviews(list);
       } catch (error) {
         console.error(error);
@@ -44,7 +42,11 @@ export default function ProductDetailPage() {
   return (
     <div>
       <Header />
-      <ProductDetail productDetail={productDetail} reviews={reviews} />
+      <ProductDetail
+        productDetail={productDetail}
+        reviews={reviews}
+        setReviews={setReviews}
+      />
     </div>
   );
 }

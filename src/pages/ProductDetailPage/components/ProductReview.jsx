@@ -4,7 +4,6 @@ import { InputStyle } from "@/components/Input";
 import Button from "@/components/Button";
 import KebabIcon from "@/assets/icon/kebab_icon.svg";
 import Profile from "@/assets/common/profile.svg";
-import EmptyReviewImg from "@/assets/common/inquiry_empty.svg";
 import KebabButton from "@/components/KebabButton";
 
 const Container = styled.div`
@@ -81,31 +80,6 @@ const Line = styled.div`
   background-color: var(--secondary-200);
 `;
 
-const EmptyContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-`;
-
-const EmptyImg = styled.img`
-  width: 140px;
-  height: 140px;
-
-  @media (min-width: 1200px) {
-    width: 196px;
-    height: 196px;
-  }
-`;
-
-const EmptyText = styled.p`
-  font-size: 16px;
-  color: var(--secondary-400);
-  text-align: center;
-`;
-
 const StyledTextarea = styled(InputStyle).attrs({ as: "textarea" })`
   height: 80px;
   resize: none;
@@ -128,34 +102,35 @@ const NoLinkButton = styled(Button)`
   }
 `;
 
-export default function ProductReview({ review }) {
+export default function ProductReview({ review, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editReview, setEditReview] = useState(review.content);
   const [kebabOpen, setKebabOpen] = useState(null);
+  console.log(review.content);
 
   const handleKebabToggle = (reviewId) => {
     setKebabOpen((prev) => (prev === reviewId ? null : reviewId));
   };
 
   const handleEditOpen = () => {
-    setIsEditing(!isEditing);
+    setIsEditing((prev) => !prev);
+    setEditReview(review.content);
     setKebabOpen(null);
   };
 
-  if (!review || review.content.length === 0) {
-    return (
-      <EmptyContainer>
-        <EmptyImg src={EmptyReviewImg} alt="리뷰가 없습니다" />
-        <EmptyText>아직 문의가 없어요</EmptyText>
-      </EmptyContainer>
-    );
-  }
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    if (!editReview.trim()) return;
+
+    onUpdate(review.id, editReview);
+    setIsEditing(false);
+  };
 
   return (
-    <Container key={review.id}>
+    <Container>
       {isEditing ? (
         <StyledTextarea
-          type="text"
           value={editReview}
           onChange={(e) => setEditReview(e.target.value)}
         />
@@ -191,7 +166,7 @@ export default function ProductReview({ review }) {
         {isEditing && (
           <ButtonContainer>
             <NoLinkButton onClick={handleEditOpen}>취소</NoLinkButton>
-            <Button>수정완료</Button>
+            <Button onClick={handleEditSubmit}>수정완료</Button>
           </ButtonContainer>
         )}
       </ReviewerContainer>

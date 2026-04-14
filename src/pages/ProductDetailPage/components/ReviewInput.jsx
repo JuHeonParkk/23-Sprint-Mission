@@ -40,12 +40,11 @@ const SubmitButton = styled(Button)`
   align-self: flex-end;
 `;
 
-export default function ReviewInput() {
+export default function ReviewInput({ onSubmit }) {
   const [review, setReview] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
+    onSubmit(review);
     setReview("");
   };
 
