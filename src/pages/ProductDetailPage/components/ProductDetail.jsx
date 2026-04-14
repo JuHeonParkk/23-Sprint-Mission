@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import ProductInfo from "./ProductInfo";
 import ReviewInput from "./ReviewInput";
 import ProductReview from "./ProductReview";
+import { createReview, updateComment, deleteComment } from "@/api/comment";
 
 import ArrowBackIcon from "@/assets/icon/arrow_back.svg";
 import EmptyReviewImg from "@/assets/common/inquiry_empty.svg";
@@ -76,22 +77,42 @@ const EmptyText = styled.p`
 export default function ProductDetail({ productDetail, reviews, setReviews }) {
   const navigate = useNavigate();
 
-  const handleReviewSubmit = (newReview) => {
-    const review = {
-      id: Date.now(),
-      content: newReview,
-      updatedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-    };
-    setReviews((prevReviews) => [review, ...prevReviews]);
+  // 리뷰 등록 핸들러
+  const handleReviewSubmit = async (productId, newReview) => {
+    try {
+      const createdReview = await createReview(productId, newReview);
+      setReviews((prevReviews) => [...prevReviews, createdReview]);
+    } catch (error) {
+      console.error("리뷰 등록 실패:", error);
+    }
   };
 
-  const handleReviewUpdate = (id, editReview) => {
-    setReviews((prevReviews) =>
-      prevReviews.map((review) =>
-        review.id === id ? { ...review, content: editReview } : review,
-      ),
-    );
+  // 리뷰 수정 핸들러
+  const handleReviewUpdate = async (productId, editReview) => {
+    try {
+      const updatedReview = await updateComment(productId, editReview);
+      setReviews((prevReviews) =>
+        prevReviews.map((review) =>
+          review.id === updatedReview.id
+            ? { ...review, content: updatedReview.content }
+            : review,
+        ),
+      );
+    } catch (error) {
+      console.error("리뷰 수정 실패:", error);
+    }
+  };
+
+  // 리뷰 삭제 핸들러
+  const handleReviewDelete = async (reviewId) => {
+    try {
+      await deleteComment(reviewId);
+      setReviews((prevReviews) =>
+        prevReviews.filter((review) => review.id !== reviewId),
+      );
+    } catch (error) {
+      console.error("리뷰 삭제 실패:", error);
+    }
   };
 
   return (
@@ -111,6 +132,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
               key={review.id}
               review={review}
               onUpdate={handleReviewUpdate}
+              onDelete={handleReviewDelete}
             />
           ))
         )}

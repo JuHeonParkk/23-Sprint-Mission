@@ -102,7 +102,7 @@ const NoLinkButton = styled(Button)`
   }
 `;
 
-export default function ProductReview({ review, onUpdate }) {
+export default function ProductReview({ review, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editReview, setEditReview] = useState(review.content);
   const [kebabOpen, setKebabOpen] = useState(null);
@@ -112,12 +112,14 @@ export default function ProductReview({ review, onUpdate }) {
     setKebabOpen((prev) => (prev === reviewId ? null : reviewId));
   };
 
+  // 리뷰 수정 UI변경 핸들러
   const handleEditOpen = () => {
     setIsEditing((prev) => !prev);
     setEditReview(review.content);
     setKebabOpen(null);
   };
 
+  // 리뷰 수정 제출 핸들러
   const handleEditSubmit = (e) => {
     e.preventDefault();
 
@@ -144,7 +146,7 @@ export default function ProductReview({ review, onUpdate }) {
           {kebabOpen === review.id && (
             <KebabButton>
               <li onClick={handleEditOpen}>수정하기</li>
-              <li>삭제하기</li>
+              <li onClick={() => onDelete(review.id)}>삭제하기</li>
             </KebabButton>
           )}
         </ReviewContainer>
