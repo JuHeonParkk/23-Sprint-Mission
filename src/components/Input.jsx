@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const Input = styled.input`
+export const InputStyle = styled.input`
   width: 100%;
   height: 56px;
-  padding: 15px 24px;
+  padding: 16px 24px;
   background-color: var(--secondary-100);
   border: none;
   border-radius: 12px;
@@ -19,8 +19,11 @@ const Input = styled.input`
 
   &::placeholder {
     font-size: 16px;
+    line-height: 26px;
     color: var(--secondary-400);
   }
 `;
 
-export default Input;
+export default function Input({ className = "", ...rest }) {
+  return <InputStyle className={className} {...rest} />;
+}

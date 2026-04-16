@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AllProductSection from "./components/AllProductSection";
 import BestProductSection from "./components/BestProductSection";
-import axios from "@/api/index";
+import axios from "@/api/instance";
 import useDevice from "@/hooks/useDevice";
 
 export default function ProductsPage() {

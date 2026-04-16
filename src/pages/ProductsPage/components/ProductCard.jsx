@@ -1,7 +1,7 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import like from "@/assets/icon/like.svg";
-import placeholderImage from "@/assets/placeholderImage.svg";
+import placeholderImage from "@/assets/common/placeholderImage.svg";
 
 const Container = styled.div`
   display: flex;
@@ -51,10 +51,12 @@ const LikeCount = styled.span`
 `;
 
 export default function ProductCard({
-  product: { images, name, price, favoriteCount },
+  product: { id, images, name, price, favoriteCount },
 }) {
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container onClick={() => navigate(`/items/${id}`)}>
       <ProductImg
         src={images && images.length > 0 ? images[0] : placeholderImage}
         alt={name}

@@ -10,6 +10,7 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
 
   &:hover {
     background-color: var(--primary-200);
