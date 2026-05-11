@@ -9,6 +9,8 @@ import FeatureImage1 from "@/assets/main/section_01.png";
 import FeatureImage2 from "@/assets/main/section_02.png";
 import FeatureImage3 from "@/assets/main/section_03.png";
 
+import type { HeroContent, FeatureContent } from './components/MainContent';
+
 export default function MainPage() {
   return (
     <div>
