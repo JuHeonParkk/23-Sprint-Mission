@@ -1,15 +1,13 @@
 import Header from "@/components/Header";
 import HeroSection from "./components/HeroSection";
 import FeatureSection from "./components/FeatureSection";
-import Footer from "@/components/Footer";
+import Footer from "./components/Footer";
 
 import HeroImage from "@/assets/main/hero_img.png";
 import HeroFooterImage from "@/assets/main/hero_footer_img.png";
 import FeatureImage1 from "@/assets/main/section_01.png";
 import FeatureImage2 from "@/assets/main/section_02.png";
 import FeatureImage3 from "@/assets/main/section_03.png";
-
-import type { HeroContent, FeatureContent } from './components/MainContent';
 
 export default function MainPage() {
   return (
