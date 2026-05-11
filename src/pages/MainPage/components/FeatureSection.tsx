@@ -1,4 +1,14 @@
+import { mainFeatureContents } from "./MainContent";
+
+import FeatureImage1 from "@/assets/main/section_01.png";
+import FeatureImage2 from "@/assets/main/section_02.png";
+import FeatureImage3 from "@/assets/main/section_03.png";
+
 import styled from "styled-components";
+
+interface StyledProps {
+  $alignReverse?: boolean;
+}
 
 const Container = styled.div`
   padding: 52px 16px;
@@ -13,7 +23,7 @@ const Container = styled.div`
   }
 `;
 
-const ContentInner = styled.div`
+const ContentInner = styled.div<StyledProps>`
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -43,7 +53,7 @@ const Img = styled.img`
   }
 `;
 
-const FeatureText = styled.div`
+const FeatureText = styled.div<StyledProps>`
   flex-grow: 1;
   color: var(--secondary-700);
 
@@ -93,23 +103,24 @@ const Info = styled.p`
   }
 `;
 
-export default function FeatureSection({
-  imgUrl,
-  subTitle,
-  title,
-  info,
-  alignReverse,
-}) {
+export default function FeatureSection({}) {
+  const featureImages = [FeatureImage1, FeatureImage2, FeatureImage3];
+
   return (
     <Container>
-      <ContentInner $alignReverse={alignReverse}>
-        <Img src={imgUrl} alt="Feature" />
-        <FeatureText $alignReverse={alignReverse}>
-          <SubTitle>{subTitle}</SubTitle>
-          <Title>{title}</Title>
-          <Info>{info}</Info>
-        </FeatureText>
-      </ContentInner>
+      {mainFeatureContents.map((feature, index) => {
+        const isReverse = index % 2 === 1;
+        return (
+          <ContentInner key={feature.label} $alignReverse={isReverse}>
+            <Img src={featureImages[index]} alt="Feature" />
+            <FeatureText $alignReverse={isReverse}>
+              <SubTitle>{feature.label}</SubTitle>
+              <Title>{feature.title.join("\n")}</Title>
+              <Info>{feature.description.join("\n")}</Info>
+            </FeatureText>
+          </ContentInner>
+        );
+      })}
     </Container>
   );
 }
