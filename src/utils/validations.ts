@@ -1,7 +1,7 @@
 export default function validations() {
   const emailRegex = /^\S+@\S+\.\S+$/;
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string) => {
     if (email.trim() === "") {
       return "이메일을 입력해주세요.";
     } else if (!emailRegex.test(email)) {
@@ -11,7 +11,7 @@ export default function validations() {
     }
   };
 
-  const validatePassword = (password) => {
+  const validatePassword = (password: string) => {
     if (password.trim() === "") {
       return "비밀번호를 입력해주세요.";
     } else if (password.length < 8) {
@@ -21,7 +21,10 @@ export default function validations() {
     }
   };
 
-  const validatePasswordConfirm = (password, passwordConfirm) => {
+  const validatePasswordConfirm = (
+    password: string,
+    passwordConfirm: string,
+  ) => {
     if (passwordConfirm.trim() === "") {
       return "비밀번호를 입력해주세요.";
     } else if (password !== passwordConfirm) {
@@ -31,7 +34,7 @@ export default function validations() {
     }
   };
 
-  const validateNickname = (nickname) => {
+  const validateNickname = (nickname: string) => {
     if (nickname.trim() === "") {
       return "닉네임을 입력해주세요.";
     } else {
