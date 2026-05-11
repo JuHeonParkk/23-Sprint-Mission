@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
@@ -11,6 +10,7 @@ import LogoHeader from "./components/LogoHeader";
 import passwordHiddenIcon from "@/assets/icon/password_hidden_icon.svg";
 import passwordVisibleIcon from "@/assets/icon/password_visible_icon.svg";
 
+import styled from "styled-components";
 interface StyledProps {
   $show?: boolean;
 }
@@ -139,7 +139,7 @@ export default function LoginPage() {
             placeholder="이메일을 입력해주세요"
             required
             autoFocus
-            show={!!emailError}
+            $show={!!emailError}
           />
           <ErrorMessage $show={!!emailError}>{emailError}</ErrorMessage>
         </InputItem>
@@ -154,7 +154,7 @@ export default function LoginPage() {
               onBlur={() => setPasswordError(validatePassword(password))}
               placeholder="비밀번호를 입력해주세요"
               required
-              show={!!passwordError}
+              $show={!!passwordError}
             />
             <button
               type="button"

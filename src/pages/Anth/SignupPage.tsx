@@ -164,7 +164,7 @@ export default function SignupPage() {
             placeholder="이메일을 입력해주세요"
             required
             autoFocus
-            show={!!emailError}
+            $show={!!emailError}
             onChange={handleEmailChange}
             onBlur={() => setEmailError(validateEmail(email))}
           />
@@ -177,7 +177,7 @@ export default function SignupPage() {
             id="nickname"
             placeholder="닉네임을 입력해주세요"
             required
-            show={!!nicknameError}
+            $show={!!nicknameError}
             onChange={handleNicknameChange}
             onBlur={() => setNicknameError(validateNickname(nickname))}
           />
@@ -191,7 +191,7 @@ export default function SignupPage() {
               id="password"
               placeholder="비밀번호를 입력해주세요"
               required
-              show={!!passwordError}
+              $show={!!passwordError}
               onChange={handlePasswordChange}
               onBlur={() => setPasswordError(validatePassword(password))}
             />
@@ -215,7 +215,7 @@ export default function SignupPage() {
               id="passwordConfirm"
               placeholder="비밀번호를 다시 한 번 입력해주세요"
               required
-              show={!!passwordConfirmError}
+              $show={!!passwordConfirmError}
               onChange={handlePasswordConfirmChange}
               onBlur={() =>
                 setPasswordConfirmError(
