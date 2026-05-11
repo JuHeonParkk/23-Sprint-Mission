@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
 import validations from "@/utils/validations";
 
@@ -12,6 +11,12 @@ import SocialLogin from "./components/SocialLogin";
 import passwordHiddenIcon from "@/assets/icon/password_hidden_icon.svg";
 import passwordVisibleIcon from "@/assets/icon/password_visible_icon.svg";
 
+import styled from "styled-components";
+
+interface StyledProps {
+  $show: boolean;
+}
+
 const Container = styled.div`
   width: 100%;
   max-width: 640px;
@@ -21,17 +26,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Header = styled.div`
-  margin: 60px 0 40px 0;
-  text-align: center;
-  & img {
-    width: 198px;
-    @media (min-width: 768px) {
-      width: 396px;
-    }
-  }
 `;
 
 const Form = styled.form`
@@ -93,12 +87,12 @@ const LoginLink = styled.div`
   }
 `;
 
-const ErrorMessage = styled.p`
+const ErrorMessage = styled.p<StyledProps>`
   padding-left: 16px;
   font-size: 14px;
   font-weight: 600;
   color: var(--error);
-  display: ${({ show }) => (show ? "block" : "none")};
+  display: ${({ $show }) => ($show ? "block" : "none")};
 `;
 
 export default function SignupPage() {
@@ -121,12 +115,32 @@ export default function SignupPage() {
     validateNickname,
   } = validations();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEmailError(validateEmail(email));
     setNicknameError(validateNickname(nickname));
     setPasswordError(validatePassword(password));
     setPasswordConfirmError(validatePasswordConfirm(password, passwordConfirm));
+  };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setEmailError("");
+  };
+
+  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNickname(e.target.value);
+    setNicknameError("");
+  };
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setPasswordError("");
+  };
+
+  const handlePasswordConfirmChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPasswordConfirm(e.target.value);
+    setPasswordConfirmError("");
   };
 
   const isFormValid =
@@ -151,13 +165,10 @@ export default function SignupPage() {
             required
             autoFocus
             show={!!emailError}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
+            onChange={handleEmailChange}
             onBlur={() => setEmailError(validateEmail(email))}
           />
-          <ErrorMessage show={!!emailError}>{emailError}</ErrorMessage>
+          <ErrorMessage $show={!!emailError}>{emailError}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="nickname">닉네임</Label>
@@ -167,13 +178,10 @@ export default function SignupPage() {
             placeholder="닉네임을 입력해주세요"
             required
             show={!!nicknameError}
-            onChange={(e) => {
-              setNickname(e.target.value);
-              setNicknameError("");
-            }}
+            onChange={handleNicknameChange}
             onBlur={() => setNicknameError(validateNickname(nickname))}
           />
-          <ErrorMessage show={!!nicknameError}>{nicknameError}</ErrorMessage>
+          <ErrorMessage $show={!!nicknameError}>{nicknameError}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="password">비밀번호</Label>
@@ -184,10 +192,7 @@ export default function SignupPage() {
               placeholder="비밀번호를 입력해주세요"
               required
               show={!!passwordError}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
+              onChange={handlePasswordChange}
               onBlur={() => setPasswordError(validatePassword(password))}
             />
             <button
@@ -200,7 +205,7 @@ export default function SignupPage() {
               />
             </button>
           </PasswordContainer>
-          <ErrorMessage show={!!passwordError}>{passwordError}</ErrorMessage>
+          <ErrorMessage $show={!!passwordError}>{passwordError}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
@@ -211,10 +216,7 @@ export default function SignupPage() {
               placeholder="비밀번호를 다시 한 번 입력해주세요"
               required
               show={!!passwordConfirmError}
-              onChange={(e) => {
-                setPasswordConfirm(e.target.value);
-                setPasswordConfirmError("");
-              }}
+              onChange={handlePasswordConfirmChange}
               onBlur={() =>
                 setPasswordConfirmError(
                   validatePasswordConfirm(password, passwordConfirm),
@@ -233,15 +235,11 @@ export default function SignupPage() {
               />
             </button>
           </PasswordContainer>
-          <ErrorMessage show={!!passwordConfirmError}>
+          <ErrorMessage $show={!!passwordConfirmError}>
             {passwordConfirmError}
           </ErrorMessage>
         </InputItem>
-        <SubmitButton
-          type="submit"
-          onClick={handleSubmit}
-          disabled={!isFormValid}
-        >
+        <SubmitButton type="submit" disabled={!isFormValid}>
           회원가입
         </SubmitButton>
       </Form>
