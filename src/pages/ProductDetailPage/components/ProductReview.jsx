@@ -106,7 +106,6 @@ export default function ProductReview({ review, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editReview, setEditReview] = useState(review.content);
   const [kebabOpen, setKebabOpen] = useState(null);
-  console.log(review.content);
 
   const handleKebabToggle = (reviewId) => {
     setKebabOpen((prev) => (prev === reviewId ? null : reviewId));

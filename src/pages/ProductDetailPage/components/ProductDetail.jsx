@@ -92,6 +92,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       setReviews((prevReviews) => [...prevReviews, createdReview]);
     } catch (error) {
       console.error("리뷰 등록 실패:", error);
+      alert(error.message);
     }
   };
 
@@ -108,6 +109,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       );
     } catch (error) {
       console.error("리뷰 수정 실패:", error);
+      alert(error.message);
     }
   };
 
@@ -120,6 +122,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       );
     } catch (error) {
       console.error("리뷰 삭제 실패:", error);
+      alert(error.message);
     }
   };
 
