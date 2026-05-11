@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,6 +10,10 @@ import LogoHeader from "./components/LogoHeader";
 
 import passwordHiddenIcon from "@/assets/icon/password_hidden_icon.svg";
 import passwordVisibleIcon from "@/assets/icon/password_visible_icon.svg";
+
+interface StyledProps {
+  $show?: boolean;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -81,12 +85,12 @@ const SignupLink = styled.div`
   }
 `;
 
-const ErrorMessage = styled.p`
+const ErrorMessage = styled.p<StyledProps>`
   padding-left: 16px;
   font-size: 14px;
   font-weight: 600;
   color: var(--error);
-  display: ${({ show }) => (show ? "block" : "none")};
+  display: ${({ $show }) => ($show ? "block" : "none")};
 `;
 
 export default function LoginPage() {
@@ -98,10 +102,20 @@ export default function LoginPage() {
 
   const { emailRegex, validateEmail, validatePassword } = validations();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEmailError(validateEmail(email));
     setPasswordError(validatePassword(password));
+  };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setEmailError("");
+  };
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setPasswordError("");
   };
 
   const isFormValid =
@@ -120,17 +134,14 @@ export default function LoginPage() {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
+            onChange={handleEmailChange}
             onBlur={() => setEmailError(validateEmail(email))}
             placeholder="이메일을 입력해주세요"
             required
             autoFocus
             show={!!emailError}
           />
-          <ErrorMessage show={!!emailError}>{emailError}</ErrorMessage>
+          <ErrorMessage $show={!!emailError}>{emailError}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="password">비밀번호</Label>
@@ -139,10 +150,7 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               id="password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
+              onChange={handlePasswordChange}
               onBlur={() => setPasswordError(validatePassword(password))}
               placeholder="비밀번호를 입력해주세요"
               required
@@ -158,13 +166,9 @@ export default function LoginPage() {
               />
             </button>
           </PasswordContainer>
-          <ErrorMessage show={!!passwordError}>{passwordError}</ErrorMessage>
+          <ErrorMessage $show={!!passwordError}>{passwordError}</ErrorMessage>
         </InputItem>
-        <SubmitButton
-          type="submit"
-          onClick={handleSubmit}
-          disabled={!isFormValid}
-        >
+        <SubmitButton type="submit" disabled={!isFormValid}>
           로그인
         </SubmitButton>
       </Form>
