@@ -1,12 +1,12 @@
 import instance from "./instance";
 
 // 상품 리뷰 조회
-export const getReview = async (productId) => {
+export const getReview = async (productId, { limit = 3, cursor = 0 } = {}) => {
   const response = await instance.get(`/products/${productId}/comments`, {
     params: {
       productId,
-      limit: 3,
-      cursor: 0,
+      limit,
+      cursor,
     },
   });
   return response.data;
@@ -22,11 +22,10 @@ export const createReview = async (productId, reviewData) => {
 };
 
 // 리뷰 수정
-export const updateComment = async (commentId, updateComment) => {
-  const response = await instance.patch(
-    `/comments/${commentId}`,
+export const updateComment = async (commentId, { updateComment }) => {
+  const response = await instance.patch(`/comments/${commentId}`, {
     updateComment,
-  );
+  });
   return response.data;
 };
 
