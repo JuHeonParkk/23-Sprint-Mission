@@ -1,19 +1,9 @@
-export interface AuthBaseFiled {
+export interface AuthBaseField {
   email: string;
   password: string;
 }
 
-export interface SignupProps extends AuthBaseFiled {
+export interface SignupProps extends AuthBaseField {
   nickname: string;
   passwordConfirm: string;
-}
-
-export interface LoginFormProps {
-  onSubmit: () => void;
-  isLoading: boolean;
-}
-
-export interface SignupFormProps {
-  onSubmit: () => void;
-  isLoading: boolean;
 }
