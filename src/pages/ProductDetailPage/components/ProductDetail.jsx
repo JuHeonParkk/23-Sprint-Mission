@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@/components/Button";
 import ProductInfo from "./ProductInfo";
 import ReviewInput from "./ReviewInput";
@@ -41,12 +41,22 @@ const ReviewContainer = styled.div`
   gap: 48px;
 `;
 
-const BackButton = styled(Button)`
+const BackButton = styled(Link)`
   display: flex;
   align-items: center;
   gap: 8px;
   border-radius: 40px;
   padding: 11px 40px;
+  border: none;
+  background-color: var(--primary-100);
+  color: #f3f4f5;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--primary-200);
+  }
 `;
 
 const EmptyContainer = styled.div`
@@ -75,8 +85,6 @@ const EmptyText = styled.p`
 `;
 
 export default function ProductDetail({ productDetail, reviews, setReviews }) {
-  const navigate = useNavigate();
-
   // 리뷰 등록 핸들러
   const handleReviewSubmit = async (productId, newReview) => {
     try {
@@ -84,6 +92,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       setReviews((prevReviews) => [...prevReviews, createdReview]);
     } catch (error) {
       console.error("리뷰 등록 실패:", error);
+      alert(error.message);
     }
   };
 
@@ -100,6 +109,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       );
     } catch (error) {
       console.error("리뷰 수정 실패:", error);
+      alert(error.message);
     }
   };
 
@@ -112,6 +122,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       );
     } catch (error) {
       console.error("리뷰 삭제 실패:", error);
+      alert(error.message);
     }
   };
 
@@ -123,7 +134,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
       <ReviewContainer>
         {reviews.length === 0 ? (
           <EmptyContainer>
-            <EmptyImg src={EmptyReviewImg} alt="리뷰가 없습니다" />
+            <EmptyImg src={EmptyReviewImg} alt="" />
             <EmptyText>아직 문의가 없어요</EmptyText>
           </EmptyContainer>
         ) : (
@@ -136,7 +147,7 @@ export default function ProductDetail({ productDetail, reviews, setReviews }) {
             />
           ))
         )}
-        <BackButton onClick={() => navigate("/items")}>
+        <BackButton to="/items">
           <p>목록으로 돌아가기</p>
           <img src={ArrowBackIcon} />
         </BackButton>

@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { ChangeEvent, FocusEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
-import validations from "@/utils/validations";
+import { SignupProps } from "@/types/auth";
+import {
+  emailRegex,
+  validateEmail,
+  validatePassword,
+  validateNickname,
+  validatePasswordConfirm,
+} from "@/utils/validations";
 
-import LogoHeader from "./components/LogoHeader";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import LogoHeader from "./components/LogoHeader";
 import SocialLogin from "./components/SocialLogin";
 
 import passwordHiddenIcon from "@/assets/icon/password_hidden_icon.svg";
 import passwordVisibleIcon from "@/assets/icon/password_visible_icon.svg";
+
+import styled from "styled-components";
+
+interface StyledProps {
+  $show: boolean;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -21,17 +33,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Header = styled.div`
-  margin: 60px 0 40px 0;
-  text-align: center;
-  & img {
-    width: 198px;
-    @media (min-width: 768px) {
-      width: 396px;
-    }
-  }
 `;
 
 const Form = styled.form`
@@ -93,50 +94,76 @@ const LoginLink = styled.div`
   }
 `;
 
-const ErrorMessage = styled.p`
+const ErrorMessage = styled.p<StyledProps>`
   padding-left: 16px;
   font-size: 14px;
   font-weight: 600;
   color: var(--error);
-  display: ${({ show }) => (show ? "block" : "none")};
+  display: ${({ $show }) => ($show ? "block" : "none")};
 `;
 
 export default function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [nicknameError, setNicknameError] = useState("");
-  const [passwordConfirmError, setPasswordConfirmError] = useState("");
+  const [values, setValues] = useState<SignupProps>({
+    email: "",
+    password: "",
+    nickname: "",
+    passwordConfirm: "",
+  });
+  const [errors, setErrors] = useState<Partial<SignupProps>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const {
-    emailRegex,
-    validateEmail,
-    validatePassword,
-    validatePasswordConfirm,
-    validateNickname,
-  } = validations();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setEmailError(validateEmail(email));
-    setNicknameError(validateNickname(nickname));
-    setPasswordError(validatePassword(password));
-    setPasswordConfirmError(validatePasswordConfirm(password, passwordConfirm));
+    setValues((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "email")
+      setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
+    if (name === "password")
+      setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
+    if (name === "nickname")
+      setErrors((prev) => ({ ...prev, nickname: validateNickname(value) }));
+    if (name === "passwordConfirm")
+      setErrors((prev) => ({
+        ...prev,
+        passwordConfirm: validatePasswordConfirm(values.password, value),
+      }));
   };
 
   const isFormValid =
-    email.trim() !== "" &&
-    emailRegex.test(email) &&
-    password.trim() !== "" &&
-    password.length >= 8 &&
-    nickname.trim() !== "" &&
-    passwordConfirm.trim() !== "" &&
-    password === passwordConfirm;
+    emailRegex.test(values.email) &&
+    values.password.length >= 8 &&
+    values.password === values.passwordConfirm &&
+    values.nickname.trim() !== "" &&
+    values.passwordConfirm.trim() !== "";
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const emailError = validateEmail(values.email);
+    const passwordError = validatePassword(values.password);
+    const nicknameError = validateNickname(values.nickname);
+    const passwordConfirmError = validatePasswordConfirm(
+      values.password,
+      values.passwordConfirm,
+    );
+
+    if (emailError || passwordError || nicknameError || passwordConfirmError) {
+      setErrors({
+        email: emailError,
+        password: passwordError,
+        nickname: nicknameError,
+        passwordConfirm: passwordConfirmError,
+      });
+      return;
+    }
+  };
 
   return (
     <Container>
@@ -147,33 +174,31 @@ export default function SignupPage() {
           <Input
             type="email"
             id="email"
+            name="email"
             placeholder="이메일을 입력해주세요"
             required
             autoFocus
-            show={!!emailError}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
-            onBlur={() => setEmailError(validateEmail(email))}
+            $show={!!errors.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
-          <ErrorMessage show={!!emailError}>{emailError}</ErrorMessage>
+          <ErrorMessage $show={!!errors.email}>{errors.email}</ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="nickname">닉네임</Label>
           <Input
             type="text"
             id="nickname"
+            name="nickname"
             placeholder="닉네임을 입력해주세요"
             required
-            show={!!nicknameError}
-            onChange={(e) => {
-              setNickname(e.target.value);
-              setNicknameError("");
-            }}
-            onBlur={() => setNicknameError(validateNickname(nickname))}
+            $show={!!errors.nickname}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
-          <ErrorMessage show={!!nicknameError}>{nicknameError}</ErrorMessage>
+          <ErrorMessage $show={!!errors.nickname}>
+            {errors.nickname}
+          </ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="password">비밀번호</Label>
@@ -181,14 +206,12 @@ export default function SignupPage() {
             <Input
               type={showPassword ? "text" : "password"}
               id="password"
+              name="password"
               placeholder="비밀번호를 입력해주세요"
               required
-              show={!!passwordError}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
-              onBlur={() => setPasswordError(validatePassword(password))}
+              $show={!!errors.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <button
               type="button"
@@ -200,7 +223,9 @@ export default function SignupPage() {
               />
             </button>
           </PasswordContainer>
-          <ErrorMessage show={!!passwordError}>{passwordError}</ErrorMessage>
+          <ErrorMessage $show={!!errors.password}>
+            {errors.password}
+          </ErrorMessage>
         </InputItem>
         <InputItem>
           <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
@@ -208,18 +233,12 @@ export default function SignupPage() {
             <Input
               type={showPasswordConfirm ? "text" : "password"}
               id="passwordConfirm"
+              name="passwordConfirm"
               placeholder="비밀번호를 다시 한 번 입력해주세요"
               required
-              show={!!passwordConfirmError}
-              onChange={(e) => {
-                setPasswordConfirm(e.target.value);
-                setPasswordConfirmError("");
-              }}
-              onBlur={() =>
-                setPasswordConfirmError(
-                  validatePasswordConfirm(password, passwordConfirm),
-                )
-              }
+              $show={!!errors.passwordConfirm}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <button
               type="button"
@@ -233,15 +252,11 @@ export default function SignupPage() {
               />
             </button>
           </PasswordContainer>
-          <ErrorMessage show={!!passwordConfirmError}>
-            {passwordConfirmError}
+          <ErrorMessage $show={!!errors.passwordConfirm}>
+            {errors.passwordConfirm}
           </ErrorMessage>
         </InputItem>
-        <SubmitButton
-          type="submit"
-          onClick={handleSubmit}
-          disabled={!isFormValid}
-        >
+        <SubmitButton type="submit" disabled={!isFormValid}>
           회원가입
         </SubmitButton>
       </Form>

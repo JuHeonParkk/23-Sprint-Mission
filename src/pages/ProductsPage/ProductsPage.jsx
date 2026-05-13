@@ -34,6 +34,7 @@ export default function ProductsPage() {
       setBestProducts(list);
     } catch (err) {
       console.error(err);
+      alert(err.message);
     }
   };
 
@@ -55,6 +56,7 @@ export default function ProductsPage() {
       setTotalCount(totalCount);
     } catch (err) {
       console.error(err);
+      alert(err.message);
     }
   };
 

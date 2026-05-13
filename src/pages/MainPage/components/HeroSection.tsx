@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
+import type { HeroContent } from "./MainContent";
+import Button from "@/components/Button";
+
 import styled from "styled-components";
 
-import Button from "@/components/Button";
+interface HeroSectionProps {
+  data?: HeroContent;
+  imgUrl: string;
+  hasButton?: boolean;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -79,15 +86,19 @@ const LinkButton = styled(Button)`
   }
 `;
 
-export default function HeroSection({ heroTitle, imgUrl, hasButton }) {
+export default function HeroSection({
+  data,
+  imgUrl,
+  hasButton,
+}: HeroSectionProps) {
   return (
     <Container>
       <HeroInner>
         <HeroText>
-          <Title>{heroTitle}</Title>
+          <Title>{data?.title.join("\n")}</Title>
           {hasButton && (
             <LinkButton as={Link} to="/items">
-              구경하러 가기
+              {data?.goItemLabel}
             </LinkButton>
           )}
         </HeroText>

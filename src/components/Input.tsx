@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const InputStyle = styled.input`
+interface StyledProps {
+  $show?: boolean;
+}
+
+export const InputStyle = styled.input<StyledProps>`
   width: 100%;
   height: 56px;
   padding: 16px 24px;
@@ -9,7 +13,7 @@ export const InputStyle = styled.input`
   border-radius: 12px;
   font-size: 16px;
   color: var(--secondary-800);
-  ${({ show }) => (show ? "outline: 1px solid var(--error);" : "")}
+  ${({ $show }) => ($show ? "outline: 1px solid var(--error);" : "")}
   font-family: inherit;
 
   &:focus,

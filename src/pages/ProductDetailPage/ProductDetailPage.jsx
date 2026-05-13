@@ -17,6 +17,7 @@ export default function ProductDetailPage() {
         setProductDetail(data);
       } catch (error) {
         console.error(error);
+        alert(error.message);
       }
     };
 
@@ -28,6 +29,7 @@ export default function ProductDetailPage() {
         setReviews(list);
       } catch (error) {
         console.error(error);
+        alert(error.message);
       }
     };
     handleProductLoad();

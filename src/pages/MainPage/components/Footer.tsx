@@ -1,10 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import facebookIcon from "../assets/icon/facebook_icon.svg";
-import twitterIcon from "../assets/icon/twitter_icon.svg";
-import youtubeIcon from "../assets/icon/youtube_icon.svg";
-import instagramIcon from "../assets/icon/instagram_icon.svg";
+import facebookIcon from "@/assets/icon/facebook_icon.svg";
+import twitterIcon from "@/assets/icon/twitter_icon.svg";
+import youtubeIcon from "@/assets/icon/youtube_icon.svg";
+import instagramIcon from "@/assets/icon/instagram_icon.svg";
 
 const Container = styled.div`
   font-size: 14px;

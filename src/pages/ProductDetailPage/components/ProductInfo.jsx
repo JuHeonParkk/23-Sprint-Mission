@@ -219,6 +219,7 @@ export default function ProductInfo({
       setLikeCount((count) => (isLiked ? count - 1 : count + 1));
     } catch (error) {
       console.error("좋아요 처리 중 오류 발생:", error);
+      alert(error.message);
     }
   };
 
