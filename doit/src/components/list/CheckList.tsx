@@ -9,7 +9,7 @@ interface CheckListProps {
 
 export default function CheckList({ isDone, todo, onToggle }: CheckListProps) {
   const baseStyle =
-    "w-full px-4 py-3 flex items-center justify-start gap-[12px] rounded-full border-(--color-slate-900) border-2 color-(--color-slate-800) cursor-pointer select-none transition-all active:scale-[0.99]";
+    "w-full px-4 py-3 flex items-center justify-start gap-[12px] rounded-full border-(--color-slate-900) border-2 color-(--color-slate-800) cursor-pointer text-16-regular select-none transition-all active:scale-[0.99]";
 
   const listStyle = isDone
     ? "bg-(--color-violet-100) line-through hover:brightness-95"

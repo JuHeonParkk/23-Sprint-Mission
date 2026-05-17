@@ -19,7 +19,7 @@ export default function TodoList({ items, onToggle }: TodoItemListProps) {
 
   const listStyle = "flex flex-col items-start justify-center gap-4 pt-3";
   const emptyListStyle =
-    "flex flex-col h-full w-full justify-center items-center gap-2 py-10 text-center text-(--color-slate-400)";
+    "flex flex-col h-full w-full justify-center items-center gap-2 py-10 text-center text-16-bold text-(--color-slate-400)";
 
   return (
     <div className="flex items-start justify-between gap-6">

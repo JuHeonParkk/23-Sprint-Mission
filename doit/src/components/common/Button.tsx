@@ -14,7 +14,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyle =
-    "flex items-center justify-center gap-2 transition-all  border-[var(--color-slate-900)] border-2 rounded-full active:translate-x-[4px] active:translate-y-[4px] active:shadow-none";
+    "flex items-center justify-center gap-2 transition-all  border-[var(--color-slate-900)] border-2 rounded-full text-16-bold active:translate-x-[4px] active:translate-y-[4px] active:shadow-none";
 
   const variants = {
     rect: "px-8 py-4",
