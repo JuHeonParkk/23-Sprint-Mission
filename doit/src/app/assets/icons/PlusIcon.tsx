@@ -19,7 +19,7 @@ export default function PlusIcon({ size, color, ...props }: IconProps) {
         stroke={color}
         strokeLinecap="round"
         strokeWidth="2"
-        d="M2 8h12M8 14V2"
+        d="M12 5V19M5 12H19"
       />
     </svg>
   );
