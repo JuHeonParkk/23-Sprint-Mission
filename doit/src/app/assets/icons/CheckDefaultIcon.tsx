@@ -16,12 +16,12 @@ export const CheckDefaultIcon = ({ size = "24", ...props }: IconProps) => {
       {...props}
     >
       <circle
-        cx="16"
-        cy="16"
-        r="15"
+        cx="12"
+        cy="12"
+        r="10"
         fill="#fefce8"
         stroke="#0f172a"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

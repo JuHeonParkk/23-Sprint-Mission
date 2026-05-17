@@ -15,13 +15,13 @@ export const CheckActiveIcon = ({ size, ...props }: IconProps) => {
       fill="none"
       {...props}
     >
-      <circle cx="16" cy="16" r="16" fill="#7c3aed" />
+      <circle cx="12" cy="12" r="12" fill="#7c3aed" />
       <path
         stroke="#fefce8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="4"
-        d="M8 16.286 13.818 22 24 12"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.5"
+        d="M7 12.5l3.5 3.5L17 8.5"
       />
     </svg>
   );
