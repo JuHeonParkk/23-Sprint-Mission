@@ -1,6 +1,6 @@
 import { apiInstance } from "./instance";
 
-interface ItemProps {
+export interface ItemProps {
   id: number;
   name: string;
   isCompleted: boolean;
@@ -15,7 +15,7 @@ interface CreateItemRequest {
   name?: string;
 }
 
-interface CreateItemProps {
+export interface CreateItemProps {
   id: number;
   tenantId: string;
   name: string;

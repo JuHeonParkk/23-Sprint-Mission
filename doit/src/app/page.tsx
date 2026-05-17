@@ -1,11 +1,22 @@
+import { getItems, ItemProps } from "@/lib/api/item";
 import SearchForm from "./_components/SearchForm";
 import TodoList from "./_components/TodoList";
 
-export default function Home() {
+export default async function Home() {
+  let initialItems: ItemProps[] = [];
+
+  try {
+    initialItems = await getItems({ page: 1, pageSize: 10 });
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <div className="bg-var(--color-background) py-6 sm:px-4 md:px-6 xl:px-90">
       <SearchForm />
-      <TodoList />
+      <TodoList initialItems={initialItems} />
     </div>
   );
 }

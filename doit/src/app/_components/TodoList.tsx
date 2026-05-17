@@ -1,22 +1,30 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import type { ItemProps } from "@/lib/api/item";
+
 import LabelTodo from "@/app/assets/images/label_todo.svg";
 import LabelDone from "@/app/assets/images/label_done.svg";
 import EmptyTodoImage from "@/app/assets/images/empty_todo.svg";
 import EmptyDoneImage from "@/app/assets/images/empty_done.svg";
 import CheckList from "@/components/list/CheckList";
 
-interface TodoItems {
-  id: number;
-  name: string;
-  isCompleted: boolean;
+interface TodoItemListProps {
+  initialItems: ItemProps[];
 }
 
-interface TodoListProps {
-  items?: TodoItems[];
-  onToggleTodo: (id: number) => void;
-}
+export default function TodoList({ initialItems }: TodoItemListProps) {
+  const [items, setItems] = useState<ItemProps[]>(initialItems);
 
-export default function TodoList({ items, onToggleTodo }: TodoListProps) {
+  const handleToggle = (id: number) => {
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
+      ),
+    );
+  };
+
   const todoItems = items?.filter((item) => !item.isCompleted);
   const doneItems = items?.filter((item) => item.isCompleted);
 
@@ -47,7 +55,7 @@ export default function TodoList({ items, onToggleTodo }: TodoListProps) {
                 key={item.id}
                 todo={item.name}
                 isDone={item.isCompleted}
-                onToggle={() => onToggleTodo?.(item.id)}
+                onToggle={() => handleToggle(item.id)}
               />
             ))
           )}
@@ -74,7 +82,7 @@ export default function TodoList({ items, onToggleTodo }: TodoListProps) {
                 key={item.id}
                 todo={item.name}
                 isDone={item.isCompleted}
-                onToggle={() => onToggleTodo?.(item.id)}
+                onToggle={() => handleToggle(item.id)}
               />
             ))
           )}
