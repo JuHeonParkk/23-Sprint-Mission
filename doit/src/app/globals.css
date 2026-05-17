@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f9fafb;
   --foreground: #171717;
+  --white: #ffffff;
 
   --slate-100: #f1f5f9;
   --slate-200: #e2e8f0;
@@ -23,6 +24,7 @@
 @theme inline {
   --color-background: var (--background);
   --color-foreground: var(--foreground);
+  --color-white: var(--white);
 
   --color-slate-100: var(--slate-100);
   --color-slate-200: var(--slate-200);
