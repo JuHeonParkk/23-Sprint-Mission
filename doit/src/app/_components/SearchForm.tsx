@@ -1,12 +1,18 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { createItem, CreateItemProps } from "@/lib/api/item";
+
 import Button from "@/components/common/Button";
 import SearchInput from "@/components/common/SearchInput";
-import PlusIcon from "@/app/assets/icons/PlusIcon";
-import { createItem } from "@/lib/api/item";
 
-export default function SearchForm() {
+import PlusIcon from "@/app/assets/icons/PlusIcon";
+
+interface SearchFormProps {
+  onAddItem: (item: CreateItemProps) => void;
+}
+
+export default function SearchForm({ onAddItem }: SearchFormProps) {
   const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,7 +23,8 @@ export default function SearchForm() {
     try {
       setIsLoading(true);
 
-      await createItem({ name: value });
+      const newItem = await createItem({ name: value });
+      onAddItem(newItem);
       setValue("");
     } catch (error) {
       if (error instanceof Error) {
