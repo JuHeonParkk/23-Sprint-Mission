@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9fafb;
+  --foreground: #171717;
+  --white: #ffffff;
+
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  --violet-100: #ebe9fe;
+  --violet-600: #7c3aed;
+
+  --rose-500: #f43f5e;
+  --lime-300: #bef264;
+  --amber-800: #92400e;
+}
+
+@theme inline {
+  --color-background: var (--background);
+  --color-foreground: var(--foreground);
+  --color-white: var(--white);
+
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-300: var(--slate-300);
+  --color-slate-400: var(--slate-400);
+  --color-slate-500: var(--slate-500);
+  --color-slate-800: var(--slate-800);
+  --color-slate-900: var(--slate-900);
+
+  --color-violet-100: var(--violet-100);
+  --color-violet-600: var(--violet-600);
+
+  --color-rose-500: var(--rose-500);
+  --color-lime-300: var(--lime-300);
+  --color-amber-800: var(--amber-800);
+
+  --text-20-bold: 20px;
+  --text-20-bold--line-height: 20px;
+  --text-20-bold--font-weight: 700;
+
+  --text-18-bold: 18px;
+  --text-18-bold--line-height: 18px;
+  --text-18-bold--font-weight: 700;
+
+  --text-16-extrabold: 16px;
+  --text-16-extrabold--line-height: 16px;
+  --text-16-extrabold--font-weight: 800;
+
+  --text-16-bold: 16px;
+  --text-16-bold--line-height: 16px;
+  --text-16-bold--font-weight: 700;
+
+  --text-16-regular: 16px;
+  --text-16-regular--line-height: 16px;
+  --text-16-regular--font-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
