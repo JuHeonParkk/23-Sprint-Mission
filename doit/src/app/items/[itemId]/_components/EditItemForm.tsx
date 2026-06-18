@@ -9,7 +9,7 @@ import Button from "@/components/common/Button";
 import ItemImageInput from "./ItemImageInput";
 import TodoItemInput from "./TodoItemInput";
 import MemoTextarea from "./MemoTextarea";
-import { updateItem } from "@/lib/api/item";
+import { deleteItem, updateItem } from "@/lib/api/item";
 import { useRouter } from "next/navigation";
 
 interface EditItemFormProps {
@@ -37,20 +37,33 @@ const EditItemForm = ({ item }: EditItemFormProps) => {
     e.preventDefault();
 
     if (isSubmitDisabled) return;
+    try {
+      await updateItem(item.id, {
+        name,
+        memo,
+        imageUrl,
+        isCompleted,
+      });
 
-    await updateItem(item.id, {
-      name,
-      memo,
-      imageUrl,
-      isCompleted,
-    });
-
-    router.push("/");
+      router.push("/");
+      router.refresh();
+    } catch {
+      alert("수정 실패");
+    }
   };
 
-  useEffect(() => {
-    console.log("현재 imageUrl", imageUrl);
-  }, [imageUrl]);
+  const handleDelete = async () => {
+    try {
+      await deleteItem(item.id);
+
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -80,7 +93,12 @@ const EditItemForm = ({ item }: EditItemFormProps) => {
           <CheckIcon size="16" color="var(--slate-900)" />
           수정 완료
         </Button>
-        <Button type="button" color="var(--rose-500)" textColor="var(--white)">
+        <Button
+          type="button"
+          onClick={handleDelete}
+          color="var(--rose-500)"
+          textColor="var(--white)"
+        >
           <CloseIcon size="16" color="var(--white)" />
           삭제하기
         </Button>

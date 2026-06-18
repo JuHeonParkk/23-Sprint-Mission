@@ -53,3 +53,7 @@ export const createImageUrl = async (image: File): Promise<{ url: string }> => {
 
   return response.data;
 };
+
+export const deleteItem = async (itemId: number): Promise<string> => {
+  return await apiInstance.delete(`/items/${itemId}`);
+};
