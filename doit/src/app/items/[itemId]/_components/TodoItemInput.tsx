@@ -22,7 +22,7 @@ const TodoItemInput = ({
           : "border-2 border-slate-900 bg-white text-slate-900"
       }`}
     >
-      <button onClick={onToggle}>
+      <button type="button" onClick={onToggle}>
         {isCompleted ? (
           <CheckActiveIcon size="32" />
         ) : (

@@ -13,10 +13,6 @@ export interface ItemResponse {
   isCompleted: boolean;
 }
 
-export interface UploadImageResponse {
-  url: string;
-}
-
 export interface GetItemRequest {
   page?: number;
   pageSize?: number;

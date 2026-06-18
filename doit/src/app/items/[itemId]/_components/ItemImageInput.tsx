@@ -11,11 +11,13 @@ import PlusIcon from "@/assets/icons/PlusIcon";
 interface ItemImageInputProps {
   defaultImage?: string;
   onImageChange: (imageUrl: string) => void;
+  onUploadingChange?: (isUploading: boolean) => void;
 }
 
 const ItemImageInput = ({
   defaultImage,
   onImageChange,
+  onUploadingChange,
 }: ItemImageInputProps) => {
   const [previewImage, setPreviewImage] = useState(defaultImage);
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,9 +28,16 @@ const ItemImageInput = ({
     const previewImage = URL.createObjectURL(file);
     setPreviewImage(previewImage);
 
-    const result = await createImageUrl(file);
-    setPreviewImage(result.url);
-    onImageChange(result.url);
+    try {
+      onUploadingChange?.(true);
+
+      const result = await createImageUrl(file);
+
+      setPreviewImage(result.url);
+      onImageChange(result.url);
+    } finally {
+      onUploadingChange?.(false);
+    }
   };
 
   return (
@@ -42,8 +51,8 @@ const ItemImageInput = ({
               fill
               className="object-cover rounded-3xl"
             />
-            <div className="absolute w-16 h-16 flex items-center justify-center rounded-full bg-slate-200 bottom-4 right-4">
-              <EditIcon size="24" color="var(--slate-500)" />
+            <div className="absolute w-16 h-16 flex items-center justify-center rounded-full bg-slate-900 opacity-50 border-2 border-slate-900 bottom-4 right-4">
+              <EditIcon size="24" color="var(--white)" />
             </div>
           </>
         ) : (

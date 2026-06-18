@@ -21,14 +21,16 @@ export default function Button({
   color,
   textColor,
   children,
+  disabled,
   ...props
 }: ButtonProps) {
   return (
     <button
-      className={`${baseStyle} ${variants[variant]} ${buttonShadow}`}
+      className={`${baseStyle} ${variants[variant]} ${buttonShadow} 
+        ${disabled ? "cursor-not-allowed" : ""}`}
       style={{
-        backgroundColor: color,
-        color: textColor,
+        backgroundColor: disabled ? "var(--color-slate-200)" : color,
+        color: disabled ? "var(--color-slate-900)" : textColor,
       }}
       {...props}
     >

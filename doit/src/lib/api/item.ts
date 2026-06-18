@@ -5,7 +5,6 @@ import {
   CreateItemRequest,
   ItemResponse,
   UpdateItemRequest,
-  UploadImageResponse,
 } from "@/types/item";
 
 export const getItems = async ({
@@ -45,7 +44,7 @@ export const updateItem = async (
   return response.data;
 };
 
-export const createImageUrl = async (image: File) => {
+export const createImageUrl = async (image: File): Promise<{ url: string }> => {
   const formData = new FormData();
 
   formData.append("image", image);
