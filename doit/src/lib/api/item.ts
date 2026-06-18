@@ -5,6 +5,7 @@ import {
   CreateItemRequest,
   ItemResponse,
   UpdateItemRequest,
+  UploadImageResponse,
 } from "@/types/item";
 
 export const getItems = async ({
@@ -49,7 +50,7 @@ export const createImageUrl = async (image: File) => {
 
   formData.append("image", image);
 
-  const response = await apiInstance.post("images/upload", formData);
+  const response = await apiInstance.post("/images/upload", formData);
 
   return response.data;
 };

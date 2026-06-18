@@ -14,6 +14,7 @@
   --slate-900: #0f172a;
 
   --violet-100: #ebe9fe;
+  --violet-200: #ddd6fe;
   --violet-600: #7c3aed;
 
   --rose-500: #f43f5e;
@@ -35,6 +36,7 @@
   --color-slate-900: var(--slate-900);
 
   --color-violet-100: var(--violet-100);
+  --color-violet-200: var(--violet-200);
   --color-violet-600: var(--violet-600);
 
   --color-rose-500: var(--rose-500);

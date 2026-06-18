@@ -1,0 +1,45 @@
+"use client";
+
+import { CheckActiveIcon } from "@/assets/icons/CheckActiveIcon";
+import { CheckDefaultIcon } from "@/assets/icons/CheckDefaultIcon";
+import { useState } from "react";
+
+interface TodoItemInputProps {
+  todoName: string;
+  isCompleted: boolean;
+}
+
+const TodoItemInput = ({ todoName, isCompleted }: TodoItemInputProps) => {
+  const [name, setName] = useState(todoName);
+  const [isDone, setIsDone] = useState(isCompleted);
+
+  const handleToggle = () => {
+    setIsDone((prev) => !prev);
+  };
+
+  return (
+    <div
+      className={`w-full pl-10 flex justify-center items-center gap-4 h-16 rounded-3xl text-18-bold ${
+        isDone
+          ? "border-2 border-slate-900 bg-violet-200 text-slate-900"
+          : "border-2 border-slate-900 bg-white text-slate-900"
+      }`}
+    >
+      <button onClick={handleToggle}>
+        {isDone ? (
+          <CheckActiveIcon size="32" />
+        ) : (
+          <CheckDefaultIcon size="32" />
+        )}
+      </button>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="outline-none bg-transparent"
+      />
+    </div>
+  );
+};
+
+export default TodoItemInput;
