@@ -1,35 +1,11 @@
 import { apiInstance } from "./instance";
-
-export interface ItemProps {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
-
-interface GetItemRequest {
-  page?: number;
-  pageSize?: number;
-}
-
-interface CreateItemRequest {
-  name?: string;
-}
-
-export interface CreateItemProps {
-  id: number;
-  tenantId: string;
-  name: string;
-  memo: string;
-  imageUrl: string;
-  isCompleted: boolean;
-}
-
-export interface UpdateItemParams {
-  name?: string;
-  memo?: string;
-  imageUrl?: string;
-  isCompleted?: boolean;
-}
+import {
+  GetItemRequest,
+  ItemProps,
+  CreateItemRequest,
+  CreateItemResponse,
+  UpdateItemRequest,
+} from "@/types/item";
 
 export const getItems = async ({
   page = 1,
@@ -46,7 +22,7 @@ export const getItems = async ({
 
 export const createItem = async ({
   name,
-}: CreateItemRequest): Promise<CreateItemProps> => {
+}: CreateItemRequest): Promise<CreateItemResponse> => {
   const response = await apiInstance.post("/items", {
     name,
   });
@@ -55,8 +31,8 @@ export const createItem = async ({
 
 export const updateItem = async (
   itemId: number,
-  body: UpdateItemParams,
-): Promise<CreateItemProps> => {
+  body: UpdateItemRequest,
+): Promise<CreateItemResponse> => {
   const response = await apiInstance.patch(`/items/${itemId}`, body);
 
   return response.data;

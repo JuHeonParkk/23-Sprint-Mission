@@ -1,7 +1,7 @@
 import Image from "next/image";
-import type { ItemProps } from "@/lib/api/item";
+import type { ItemProps } from "@/types/item";
 
-import CheckList from "@/components/list/CheckList";
+import CheckList from "@/app/_components/CheckList";
 
 import LabelTodo from "@/app/assets/images/label_todo.svg";
 import LabelDone from "@/app/assets/images/label_done.svg";
@@ -42,6 +42,7 @@ export default function TodoList({ items, onToggle }: TodoItemListProps) {
             todoItems?.map((item) => (
               <CheckList
                 key={item.id}
+                itemId={item.id}
                 todo={item.name}
                 isDone={item.isCompleted}
                 onToggle={() => onToggle(item.id)}
@@ -69,6 +70,7 @@ export default function TodoList({ items, onToggle }: TodoItemListProps) {
             doneItems?.map((item) => (
               <CheckList
                 key={item.id}
+                itemId={item.id}
                 todo={item.name}
                 isDone={item.isCompleted}
                 onToggle={() => onToggle(item.id)}

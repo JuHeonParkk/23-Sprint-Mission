@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { updateItem, type ItemProps } from "@/lib/api/item";
+import { updateItem } from "@/lib/api/item";
+import type { ItemProps } from "@/types/item";
 import SearchForm from "./SearchForm";
 import TodoList from "./TodoList";
 
