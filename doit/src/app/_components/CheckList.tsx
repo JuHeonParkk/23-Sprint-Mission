@@ -23,17 +23,23 @@ export default function CheckList({
     : "bg-(--color-background) hover:bg-(--color-foreground)/5";
 
   return (
-    <div className={`${baseStyle} ${listStyle}`}>
-      <button onClick={onToggle} className="cursor-pointer">
+    <Link href={`/items/${itemId}`} className={`${baseStyle} ${listStyle}`}>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onToggle();
+        }}
+        className="cursor-pointer"
+      >
         {isDone ? (
           <CheckActiveIcon size="32" />
         ) : (
           <CheckDefaultIcon size="32" />
         )}
       </button>
-      <Link href={`/items/${itemId}`} className="hover:underline!">
-        {todo}
-      </Link>
-    </div>
+
+      <span>{todo}</span>
+    </Link>
   );
 }
