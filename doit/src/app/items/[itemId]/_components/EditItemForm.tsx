@@ -1,7 +1,9 @@
 "use client";
 
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { ItemResponse } from "@/types/item";
+import { deleteItem, updateItem } from "@/lib/api/item";
 
 import CloseIcon from "@/assets/icons/CloseIcon";
 import CheckIcon from "@/assets/icons/CheckIcon";
@@ -9,8 +11,6 @@ import Button from "@/components/common/Button";
 import ItemImageInput from "./ItemImageInput";
 import TodoItemInput from "./TodoItemInput";
 import MemoTextarea from "./MemoTextarea";
-import { deleteItem, updateItem } from "@/lib/api/item";
-import { useRouter } from "next/navigation";
 
 interface EditItemFormProps {
   item: ItemResponse;

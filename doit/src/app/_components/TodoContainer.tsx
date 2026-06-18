@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import type { ItemProps } from "@/types/item";
+import { updateItem } from "@/lib/api/item";
+
 import SearchForm from "./SearchForm";
 import TodoList from "./TodoList";
-import { updateItem } from "@/lib/api/item";
 
 interface TodoContainerProps {
   initialItems: ItemProps[];

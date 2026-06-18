@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { CheckActiveIcon } from "@/assets/icons/CheckActiveIcon";
 import { CheckDefaultIcon } from "@/assets/icons/CheckDefaultIcon";
-import Link from "next/link";
 
 interface CheckListProps {
   itemId: number;
