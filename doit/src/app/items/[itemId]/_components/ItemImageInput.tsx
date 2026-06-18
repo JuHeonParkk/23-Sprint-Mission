@@ -10,9 +10,13 @@ import PlusIcon from "@/assets/icons/PlusIcon";
 
 interface ItemImageInputProps {
   defaultImage?: string;
+  onImageChange: (imageUrl: string) => void;
 }
 
-const ItemImageInput = ({ defaultImage }: ItemImageInputProps) => {
+const ItemImageInput = ({
+  defaultImage,
+  onImageChange,
+}: ItemImageInputProps) => {
   const [previewImage, setPreviewImage] = useState(defaultImage);
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -24,6 +28,7 @@ const ItemImageInput = ({ defaultImage }: ItemImageInputProps) => {
 
     const result = await createImageUrl(file);
     setPreviewImage(result.url);
+    onImageChange(result.url);
   };
 
   return (
