@@ -1,5 +1,5 @@
-import { CheckActiveIcon } from "@/app/assets/icons/CheckActiveIcon";
-import { CheckDefaultIcon } from "@/app/assets/icons/CheckDefaultIcon";
+import { CheckActiveIcon } from "@/assets/icons/CheckActiveIcon";
+import { CheckDefaultIcon } from "@/assets/icons/CheckDefaultIcon";
 import Button from "@/components/common/Button";
 import { getItem } from "@/lib/api/item";
 
@@ -33,7 +33,7 @@ const ItemPage = async ({ params }: ItemPageParams) => {
 
       <div>
         <Button>수정 완료</Button>
-        <Button>삭제하기</Button>
+        <Button>삭제하기 </Button>
       </div>
     </div>
   );

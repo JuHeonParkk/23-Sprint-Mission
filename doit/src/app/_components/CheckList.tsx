@@ -1,5 +1,5 @@
-import { CheckActiveIcon } from "@/app/assets/icons/CheckActiveIcon";
-import { CheckDefaultIcon } from "@/app/assets/icons/CheckDefaultIcon";
+import { CheckActiveIcon } from "@/assets/icons/CheckActiveIcon";
+import { CheckDefaultIcon } from "@/assets/icons/CheckDefaultIcon";
 import Link from "next/link";
 
 interface CheckListProps {
