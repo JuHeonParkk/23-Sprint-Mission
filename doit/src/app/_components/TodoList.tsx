@@ -3,10 +3,10 @@ import type { ItemProps } from "@/types/item";
 
 import CheckList from "@/app/_components/CheckList";
 
-import LabelTodo from "@/app/assets/images/label_todo.svg";
-import LabelDone from "@/app/assets/images/label_done.svg";
-import EmptyTodoImage from "@/app/assets/images/empty_todo.svg";
-import EmptyDoneImage from "@/app/assets/images/empty_done.svg";
+import LabelTodo from "@/assets/images/label_todo.svg";
+import LabelDone from "@/assets/images/label_done.svg";
+import EmptyTodoImage from "@/assets/images/empty_todo.svg";
+import EmptyDoneImage from "@/assets/images/empty_done.svg";
 
 interface TodoItemListProps {
   items: ItemProps[];

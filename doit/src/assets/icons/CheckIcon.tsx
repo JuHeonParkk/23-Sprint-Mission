@@ -19,8 +19,8 @@ export default function CheckIcon({ size, color, ...props }: IconProps) {
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
-        d="M5 13L10 18L19 7"
+        strokeWidth="3"
+        d="M3 13L9 19L21 5"
       />
     </svg>
   );

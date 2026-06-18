@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import LogoText from "@/app/assets/images/logo_text.svg";
-import LogoSmall from "@/app/assets/images/logo_small.svg";
+import LogoText from "@/assets/images/logo_text.svg";
+import LogoSmall from "@/assets/images/logo_small.svg";
 
 export default function Header() {
   return (

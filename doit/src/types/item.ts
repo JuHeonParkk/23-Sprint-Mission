@@ -4,15 +4,6 @@ export interface ItemProps {
   isCompleted: boolean;
 }
 
-export interface GetItemRequest {
-  page?: number;
-  pageSize?: number;
-}
-
-export interface CreateItemRequest {
-  name?: string;
-}
-
 export interface ItemResponse {
   id: number;
   tenantId: string;
@@ -20,6 +11,15 @@ export interface ItemResponse {
   memo: string;
   imageUrl: string;
   isCompleted: boolean;
+}
+
+export interface GetItemRequest {
+  page?: number;
+  pageSize?: number;
+}
+
+export interface CreateItemRequest {
+  name?: string;
 }
 
 export interface UpdateItemRequest {

@@ -43,3 +43,13 @@ export const updateItem = async (
 
   return response.data;
 };
+
+export const createImageUrl = async (image: File) => {
+  const formData = new FormData();
+
+  formData.append("image", image);
+
+  const response = await apiInstance.post("images/upload", formData);
+
+  return response.data;
+};

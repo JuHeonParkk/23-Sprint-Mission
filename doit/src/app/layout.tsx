@@ -15,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full antialiased">
-      <body className="w-full min-h-full flex flex-col">
+      <body className="w-full min-h-full flex flex-col items-center">
         <Header />
-        <div className="bg-var(--color-background) py-6 sm:px-4 md:px-6 xl:px-90">
+        <div className="w-full max-w-249 bg-var(--color-background) py-6 px-4">
           {children}
         </div>
       </body>
