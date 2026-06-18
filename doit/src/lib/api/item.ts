@@ -24,6 +24,13 @@ export interface CreateItemProps {
   isCompleted: boolean;
 }
 
+export interface UpdateItemParams {
+  name?: string;
+  memo?: string;
+  imageUrl?: string;
+  isCompleted?: boolean;
+}
+
 export const getItems = async ({
   page = 1,
   pageSize = 10,
@@ -43,5 +50,14 @@ export const createItem = async ({
   const response = await apiInstance.post("/items", {
     name,
   });
+  return response.data;
+};
+
+export const updateItem = async (
+  itemId: number,
+  body: UpdateItemParams,
+): Promise<CreateItemProps> => {
+  const response = await apiInstance.patch(`/items/${itemId}`, body);
+
   return response.data;
 };
