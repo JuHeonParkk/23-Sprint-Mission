@@ -3,7 +3,7 @@ import {
   GetItemRequest,
   ItemProps,
   CreateItemRequest,
-  CreateItemResponse,
+  ItemResponse,
   UpdateItemRequest,
 } from "@/types/item";
 
@@ -20,9 +20,15 @@ export const getItems = async ({
   return response.data;
 };
 
+export const getItem = async (itemId: number): Promise<ItemResponse> => {
+  const response = await apiInstance.get(`/items/${itemId}`);
+
+  return response.data;
+};
+
 export const createItem = async ({
   name,
-}: CreateItemRequest): Promise<CreateItemResponse> => {
+}: CreateItemRequest): Promise<ItemResponse> => {
   const response = await apiInstance.post("/items", {
     name,
   });
@@ -32,7 +38,7 @@ export const createItem = async ({
 export const updateItem = async (
   itemId: number,
   body: UpdateItemRequest,
-): Promise<CreateItemResponse> => {
+): Promise<ItemResponse> => {
   const response = await apiInstance.patch(`/items/${itemId}`, body);
 
   return response.data;

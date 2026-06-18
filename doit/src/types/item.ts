@@ -13,7 +13,7 @@ export interface CreateItemRequest {
   name?: string;
 }
 
-export interface CreateItemResponse {
+export interface ItemResponse {
   id: number;
   tenantId: string;
   name: string;
