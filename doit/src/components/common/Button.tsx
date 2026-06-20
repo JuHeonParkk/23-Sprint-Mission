@@ -6,29 +6,31 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   textColor?: string;
 }
 
+const baseStyle =
+  "flex items-center justify-center gap-2 transition-all  border-[var(--color-slate-900)] border-2 rounded-full text-16-bold active:translate-x-[4px] active:translate-y-[4px] active:shadow-none";
+
+const variants = {
+  rect: "px-8 py-4",
+  circle: "w-14 h-14",
+};
+
+const buttonShadow = "shadow-[6px_6px_var(--color-slate-900)]";
+
 export default function Button({
   variant = "rect",
   color,
   textColor,
   children,
+  disabled,
   ...props
 }: ButtonProps) {
-  const baseStyle =
-    "flex items-center justify-center gap-2 transition-all  border-[var(--color-slate-900)] border-2 rounded-full text-16-bold active:translate-x-[4px] active:translate-y-[4px] active:shadow-none";
-
-  const variants = {
-    rect: "px-8 py-4",
-    circle: "w-14 h-14",
-  };
-
-  const buttonShadow = "shadow-[6px_6px_var(--color-slate-900)]";
-
   return (
     <button
-      className={`${baseStyle} ${variants[variant]} ${buttonShadow} className`}
+      className={`${baseStyle} ${variants[variant]} ${buttonShadow} 
+        ${disabled ? "cursor-not-allowed" : ""}`}
       style={{
-        backgroundColor: color,
-        color: textColor,
+        backgroundColor: disabled ? "var(--color-slate-200)" : color,
+        color: disabled ? "var(--color-slate-900)" : textColor,
       }}
       {...props}
     >

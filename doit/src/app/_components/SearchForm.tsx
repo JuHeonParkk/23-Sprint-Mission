@@ -1,15 +1,16 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { createItem, CreateItemProps } from "@/lib/api/item";
+import { createItem } from "@/lib/api/item";
+import type { ItemProps } from "@/types/item";
 
 import Button from "@/components/common/Button";
 import SearchInput from "@/components/common/SearchInput";
 
-import PlusIcon from "@/app/assets/icons/PlusIcon";
+import PlusIcon from "@/assets/icons/PlusIcon";
 
 interface SearchFormProps {
-  onAddItem: (item: CreateItemProps) => void;
+  onAddItem: (item: ItemProps) => void;
 }
 
 export default function SearchForm({ onAddItem }: SearchFormProps) {

@@ -18,8 +18,8 @@ export default function PlusIcon({ size, color, ...props }: IconProps) {
       <path
         stroke={color}
         strokeLinecap="round"
-        strokeWidth="2"
-        d="m4 4 8 8M12 4l-8 8"
+        strokeWidth="3"
+        d="M3 3L21 21M21 3L3 21"
       />
     </svg>
   );

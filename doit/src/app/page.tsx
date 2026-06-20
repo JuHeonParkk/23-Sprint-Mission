@@ -1,4 +1,5 @@
-import { getItems, ItemProps } from "@/lib/api/item";
+import { getItems } from "@/lib/api/item";
+import type { ItemProps } from "@/types/item";
 import TodoContainer from "./_components/TodoContainer";
 
 export default async function Home() {
@@ -12,9 +13,5 @@ export default async function Home() {
     }
   }
 
-  return (
-    <div className="bg-var(--color-background) py-6 sm:px-4 md:px-6 xl:px-90">
-      <TodoContainer initialItems={initialItems} />
-    </div>
-  );
+  return <TodoContainer initialItems={initialItems} />;
 }

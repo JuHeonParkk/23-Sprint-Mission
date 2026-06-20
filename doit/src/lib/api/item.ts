@@ -1,28 +1,11 @@
 import { apiInstance } from "./instance";
-
-export interface ItemProps {
-  id: number;
-  name: string;
-  isCompleted: boolean;
-}
-
-interface GetItemRequest {
-  page?: number;
-  pageSize?: number;
-}
-
-interface CreateItemRequest {
-  name?: string;
-}
-
-export interface CreateItemProps {
-  id: number;
-  tenantId: string;
-  name: string;
-  memo: string;
-  imageUrl: string;
-  isCompleted: boolean;
-}
+import {
+  GetItemRequest,
+  ItemProps,
+  CreateItemRequest,
+  ItemResponse,
+  UpdateItemRequest,
+} from "@/types/item";
 
 export const getItems = async ({
   page = 1,
@@ -37,11 +20,40 @@ export const getItems = async ({
   return response.data;
 };
 
+export const getItem = async (itemId: number): Promise<ItemResponse> => {
+  const response = await apiInstance.get(`/items/${itemId}`);
+
+  return response.data;
+};
+
 export const createItem = async ({
   name,
-}: CreateItemRequest): Promise<CreateItemProps> => {
+}: CreateItemRequest): Promise<ItemResponse> => {
   const response = await apiInstance.post("/items", {
     name,
   });
   return response.data;
+};
+
+export const updateItem = async (
+  itemId: number,
+  body: UpdateItemRequest,
+): Promise<ItemResponse> => {
+  const response = await apiInstance.patch(`/items/${itemId}`, body);
+
+  return response.data;
+};
+
+export const createImageUrl = async (image: File): Promise<{ url: string }> => {
+  const formData = new FormData();
+
+  formData.append("image", image);
+
+  const response = await apiInstance.post("/images/upload", formData);
+
+  return response.data;
+};
+
+export const deleteItem = async (itemId: number): Promise<string> => {
+  return await apiInstance.delete(`/items/${itemId}`);
 };

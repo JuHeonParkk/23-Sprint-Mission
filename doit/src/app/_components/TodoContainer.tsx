@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { ItemProps } from "@/lib/api/item";
+import type { ItemProps } from "@/types/item";
+import { updateItem } from "@/lib/api/item";
+
 import SearchForm from "./SearchForm";
 import TodoList from "./TodoList";
 
@@ -16,12 +18,26 @@ export default function TodoContainer({ initialItems }: TodoContainerProps) {
     setItems((prev) => [newItem, ...prev]);
   };
 
-  const handleToggle = (id: number) => {
+  const handleToggle = async (id: number) => {
+    const target = items.find((item) => item.id === id);
+    if (!target) return;
+
+    // 낙관적 업데이트
     setItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
       ),
     );
+
+    try {
+      await updateItem(id, { isCompleted: !target.isCompleted });
+    } catch {
+      setItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, isCompleted: target.isCompleted } : item,
+        ),
+      );
+    }
   };
 
   return (
